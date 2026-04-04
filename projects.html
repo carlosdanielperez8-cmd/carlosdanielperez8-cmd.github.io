@@ -23,13 +23,14 @@
     .media-item:hover { transform: translateY(-4px); }
     .media-item img { width: 100%; height: auto; border-radius: 1rem; border: 1px solid #dce8ef; cursor: pointer; transition: transform 0.2s; }
     .media-item img:active { transform: scale(0.98); }
-    .media-item video { width: 100%; border-radius: 1rem; border: 1px solid #dce8ef; background: #000; }
     .media-caption { font-size: 0.8rem; color: #5a7b8c; margin-top: 0.6rem; }
     .media-caption i { margin-right: 0.3rem; color: #1c6e5e; }
     .footer { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #cbdde6; color: #4f6f7f; font-size: 0.8rem; }
     .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
     .lightbox img { max-width: 90%; max-height: 90%; border-radius: 0.5rem; }
     .lightbox.active { display: flex; }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
     @media (max-width: 700px) {
       .container { padding: 1rem; }
       .project-title { font-size: 1.4rem; }
@@ -54,50 +55,59 @@
       <p style="margin-top: 0.6rem;">The DEM was processed in <strong>ArcGIS Pro</strong> and further developed in <strong>Gaea</strong>, where node-based workflows and simulation techniques were used to generate a realistic representation of the terrain and water bodies. The outputs from Gaea were then imported into <strong>Blender</strong> to create a 3D rendering of Banff, complete with dynamic lighting, clouds, and flowing water.</p>
     </div>
 
-    <!-- GAEA Outputs Section -->
-    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;"><i class="fas fa-chart-line"></i> GAEA Outputs</h3>
+    <!-- Sección combinada: GAEA Outputs + Blender Renderings -->
+    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;">
+      <i class="fas fa-cubes"></i> GAEA Outputs & Blender Renderings
+    </h3>
     <div class="media-grid">
+      <!-- Elemento 1: GAEA Terrain -->
       <div class="media-item">
         <img src="assets/banff-terrain.png" alt="Banff 3D Terrain Model - GAEA Visualization" onclick="openLightbox(this.src)">
         <div class="media-caption"><i class="fas fa-image"></i> Terrain Visualization - GAEA Output</div>
       </div>
+      <!-- Elemento 2: GAEA Hydrology -->
       <div class="media-item">
         <img src="assets/banff-hydrology.png" alt="Banff Hydrological Features - Water Bodies Simulation" onclick="openLightbox(this.src)">
         <div class="media-caption"><i class="fas fa-water"></i> Hydrological Features & Water Bodies</div>
       </div>
+      <!-- Elemento 3: GAEA Flyover -->
       <div class="media-item">
         <img src="assets/banff-flyover.png" alt="Banff 3D Flyover - Aerial Perspective" onclick="openLightbox(this.src)">
-        <div class="media-caption"><i class="fas fa-map"></i> 3D Flyover - Banff Terrain Model</div>
+        <div class="media-caption"><i class="fas fa-map"></i> 3D Flyover - GAEA Output</div>
+      </div>
+      <!-- Elemento 4: Blender Video (YouTube) -->
+      <div class="media-item">
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/IrPkpBH2MxA" 
+            title="Blender Animation - Banff Flythrough" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="media-caption"><i class="fab fa-youtube"></i> Blender Animation - Banff Flythrough</div>
+      </div>
+      <!-- Elemento 5: Blender Rendering PNG -->
+      <div class="media-item">
+        <img src="assets/Blend_Banff2.png" alt="Blender 3D Rendering - Banff with Dynamic Lighting" onclick="openLightbox(this.src)">
+        <div class="media-caption"><i class="fas fa-sun"></i> Blender Rendering - Dynamic Lighting & Clouds</div>
       </div>
     </div>
 
-<!-- Blender Renderings Section -->
-<h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;">
-  <i class="fas fa-cube"></i> Blender Renderings
-</h3>
-<div class="media-grid">
-  <div class="media-item">
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem;">
-      <iframe 
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-        src="https://www.youtube.com/embed/IrPkpBH2MxA" 
-        title="Blender Animation - Banff Flythrough" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        referrerpolicy="strict-origin-when-cross-origin" 
-        allowfullscreen>
-      </iframe>
-    </div>
-    <div class="media-caption">
-      <i class="fab fa-youtube"></i> Blender Animation - Banff Flythrough
+    <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: #5a7b8c;">
+      <i class="fas fa-info-circle"></i> Click on images to view full size • Video can be played directly
     </div>
   </div>
-  <div class="media-item">
-    <img src="assets/Blend_Banff2.png" alt="Blender 3D Rendering - Banff with Dynamic Lighting" onclick="openLightbox(this.src)">
-    <div class="media-caption">
-      <i class="fas fa-sun"></i> Blender Rendering - Dynamic Lighting & Clouds
-    </div>
+
+  <div class="footer">
+    <p><i class="fas fa-map-marked-alt"></i> Carlos Pérez — GIS & Environmental Engineering Portfolio — <strong>carlosdanielperez8@gmail.com</strong></p>
+    <p style="margin-top: 0.5rem;"><a href="index.html" style="color: #1c6e5e; text-decoration: none;">← Return to main page</a></p>
   </div>
+</div>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Full size view">
 </div>
 
 <script>

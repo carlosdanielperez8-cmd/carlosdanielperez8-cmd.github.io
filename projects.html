@@ -23,6 +23,7 @@
     .media-item:hover { transform: translateY(-4px); }
     .media-item img { width: 100%; height: auto; border-radius: 1rem; border: 1px solid #dce8ef; cursor: pointer; transition: transform 0.2s; }
     .media-item img:active { transform: scale(0.98); }
+    .media-item video { width: 100%; border-radius: 1rem; border: 1px solid #dce8ef; background: #000; }
     .media-caption { font-size: 0.8rem; color: #5a7b8c; margin-top: 0.6rem; }
     .media-caption i { margin-right: 0.3rem; color: #1c6e5e; }
     .footer { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #cbdde6; color: #4f6f7f; font-size: 0.8rem; }
@@ -45,14 +46,16 @@
 
   <div class="project-card">
     <div class="project-title">
-      3D Banff Model - GAEA
-      <span class="project-badge"><i class="fas fa-mountain"></i> Terrain Simulation</span>
+      3D Banff Model - GAEA - Blender
+      <span class="project-badge"><i class="fas fa-mountain"></i> Terrain Simulation & 3D Rendering</span>
     </div>
     <div class="project-description">
-      <p><strong>Objective:</strong> Create a realistic 3D terrain model using a Digital Elevation Model (DEM) as the primary data source. The selected study area was <strong>Banff</strong>, chosen for its impressive geography, complex hydrology, and high scenic value.</p>
-      <p style="margin-top: 0.6rem;">The DEM was initially processed in <strong>ArcGIS Pro</strong> and later developed in <strong>Gaea</strong>, where node-based workflows and simulation techniques were used to generate a realistic representation of the terrain and water bodies in the region.</p>
+      <p>A 3D terrain model was created using a digital elevation model (DEM) as the primary data source. The study area chosen was <strong>Banff</strong>, notable for its stunning geography, complex hydrology, and scenic value.</p>
+      <p style="margin-top: 0.6rem;">The DEM was processed in <strong>ArcGIS Pro</strong> and further developed in <strong>Gaea</strong>, where node-based workflows and simulation techniques were used to generate a realistic representation of the terrain and water bodies. The outputs from Gaea were then imported into <strong>Blender</strong> to create a 3D rendering of Banff, complete with dynamic lighting, clouds, and flowing water.</p>
     </div>
 
+    <!-- GAEA Outputs Section -->
+    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;"><i class="fas fa-chart-line"></i> GAEA Outputs</h3>
     <div class="media-grid">
       <div class="media-item">
         <img src="assets/banff-terrain.png" alt="Banff 3D Terrain Model - GAEA Visualization" onclick="openLightbox(this.src)">
@@ -68,8 +71,24 @@
       </div>
     </div>
 
+    <!-- Blender Renderings Section -->
+    <h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;"><i class="fas fa-cube"></i> Blender Renderings</h3>
+    <div class="media-grid">
+      <div class="media-item">
+        <video controls>
+          <source src="assets/Blend_Banff.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="media-caption"><i class="fas fa-video"></i> Blender Animation - Banff Flythrough</div>
+      </div>
+      <div class="media-item">
+        <img src="assets/Blend_Banff2.png" alt="Blender 3D Rendering - Banff with Dynamic Lighting" onclick="openLightbox(this.src)">
+        <div class="media-caption"><i class="fas fa-sun"></i> Blender Rendering - Dynamic Lighting & Clouds</div>
+      </div>
+    </div>
+
     <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: #5a7b8c;">
-      <i class="fas fa-info-circle"></i> Click on any image to view full size
+      <i class="fas fa-info-circle"></i> Click on images to view full size • Video can be played directly
     </div>
   </div>
 

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Carlos Pérez | GIS & Environmental Engineering Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #f4f7fc; color: #1a2c3e; line-height: 1.5; scroll-behavior: smooth; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .hero { background: linear-gradient(135deg, #0b2b3b 0%, #1c4e6c 100%); color: white; border-radius: 2rem; padding: 2.5rem 2rem; margin-bottom: 2.5rem; box-shadow: 0 15px 30px -12px rgba(0,0,0,0.2); }
+    .hero-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+    .hero-info { flex: 1; }
+    .hero-info h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .hero-details { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0; font-size: 0.95rem; }
+    .hero-details i { margin-right: 0.5rem; width: 1.2rem; }
+    .btn-contact { background: #ffb347; color: #1a2c3e; border: none; padding: 0.7rem 1.5rem; border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; transition: 0.2s; }
+    .btn-contact:hover { background: #ff9f1a; transform: scale(1.02); }
+    .hero-photo { flex-shrink: 0; }
+    .profile-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease, border-color 0.3s ease; }
+    .profile-img:hover { transform: scale(1.02); border-color: #ffb347; }
+    .section-title { font-size: 1.8rem; font-weight: 700; margin: 2rem 0 1rem 0; border-left: 6px solid #1c6e5e; padding-left: 1rem; color: #0f3b4c; }
+    .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
+    .card { background: white; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s; border: 1px solid #e2edf2; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1); }
+    .card-icon { font-size: 2rem; color: #1c6e5e; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: #1c4e6c; }
+    .skill-badge { display: inline-block; background: #e9f0f5; padding: 0.3rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem 0.2rem; color: #1c5a7a; }
+    .exp-item { margin-bottom: 1.2rem; }
+    .exp-title { font-weight: 800; font-size: 1rem; color: #0f3b4c; }
+    .exp-meta { font-size: 0.75rem; color: #5a7b8c; margin-bottom: 0.4rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .exp-desc { font-size: 0.85rem; color: #2c4b5e; list-style-type: disc; padding-left: 1.2rem; }
+    .exp-desc li { margin-bottom: 0.3rem; }
+    hr { margin: 1rem 0; border-color: #e2edf2; }
+    .lang-soft { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; }
+    .university-logos { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; margin-top: 1rem; margin-bottom: 1rem; background: linear-gradient(135deg, #f9fdfe 0%, #f0f6fa 100%); padding: 1.2rem 1.5rem; border-radius: 1.2rem; border: 1px solid #e0edf2; }
+    .uni-logo-item { display: flex; align-items: center; gap: 1rem; background: white; padding: 0.6rem 1.2rem 0.6rem 0.8rem; border-radius: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; flex: 0 1 auto; }
+    .uni-logo-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .uni-logo-img { width: 52px; height: 52px; object-fit: contain; border-radius: 12px; background: #fff; padding: 4px; }
+    .uni-logo-text { font-weight: 700; font-size: 0.9rem; color: #1a4e6e; }
+    .uni-logo-text small { font-weight: 400; font-size: 0.7rem; color: #5e7e92; display: block; margin-top: 2px; }
+    .footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #cbdde6; color: #4f6f7f; font-size: 0.8rem; }
+    .nav-buttons { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .nav-btn { background: white; border: none; padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.05); color: #1c4e6c; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Inter', sans-serif; }
+    .nav-btn i { font-size: 1.1rem; color: #1c6e5e; }
+    .nav-btn:hover { background: #1c6e5e; color: white; transform: translateY(-3px); box-shadow: 0 10px 18px rgba(0,0,0,0.1); }
+    .nav-btn:hover i { color: white; }
+    .nav-btn.projects-btn { background: #1c6e5e; color: white; }
+    .nav-btn.projects-btn i { color: white; }
+    .nav-btn.projects-btn:hover { background: #0f4f43; transform: translateY(-3px); }
+    .map-card { margin-bottom: 1.5rem; }
+    .origin-map { height: 280px; width: 100%; border-radius: 1rem; overflow: hidden; margin-top: 1rem; border: 1px solid #dce8ef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .map-caption { font-size: 0.8rem; color: #4f6f7f; text-align: center; margin-top: 0.5rem; }
+    @media (max-width: 700px) {
+      .hero-info h1 { font-size: 2rem; }
+      .container { padding: 1rem; }
+      .hero { padding: 1.5rem; }
+      .uni-logo-img { width: 42px; height: 42px; }
+      .uni-logo-item { gap: 0.6rem; padding: 0.4rem 1rem 0.4rem 0.6rem; }
+      .uni-logo-text { font-size: 0.75rem; }
+      .nav-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+      .profile-img { width: 140px; height: 140px; }
+      .origin-map { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="nav-buttons">
+    <button class="nav-btn" id="navSkillsBtn"><i class="fas fa-chart-line"></i> Skills</button>
+    <button class="nav-btn" id="navExperienceBtn"><i class="fas fa-briefcase"></i> Experience</button>
+    <button class="nav-btn" id="navEducationBtn"><i class="fas fa-graduation-cap"></i> Education</button>
+    <button class="nav-btn" id="navContactBtn"><i class="fas fa-envelope"></i> Contact</button>
+    <button class="nav-btn projects-btn" id="navProjectsBtn"><i class="fas fa-cubes"></i> Projects</button>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-info">
+        <h1>Carlos Pérez</h1>
+        <p style="font-size: 1.1rem; max-width: 550px;">GIS & Environmental Engineer | Effective Solutions for Emerging Environments</p>
+        <div class="hero-details">
+          <span><i class="fas fa-map-marker-alt"></i> Calgary, AB</span>
+          <span><i class="fas fa-phone-alt"></i> 587-438-7249</span>
+          <span><i class="fas fa-envelope"></i> carlosdanielperez8@gmail.com</span>
+        </div>
+        <button class="btn-contact" id="contactBtn"><i class="fas fa-paper-plane"></i> Contact me by email</button>
+      </div>
+      <div class="hero-photo">
+        <img class="profile-img" src="assets/profile.jpg" alt="Carlos Pérez profile photo">
+      </div>
+      <div style="background: rgba(255,255,255,0.1); border-radius: 60px; padding: 0.8rem 1.2rem; backdrop-filter: blur(4px);">
+        <i class="fas fa-globe-americas" style="font-size: 2.2rem;"></i>
+        <div style="font-weight: 600; font-size: 0.8rem;">ArcGIS | Python | FME | SQL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <div class="card-icon"><i class="fas fa-user-check"></i></div>
+    <h3>About Me</h3>
+    <p>I am an Environmental Engineer from Colombia with over three years of professional experience in environmental projects and engineering. My background combines environmental science, project management, and technical problem-solving using Geographic Information Systems (GIS) and programming tools such as Python, ArcGIS, SQL, and FME. I have experience in automating geospatial workflows, verifying spatial data quality, and producing cartographic outputs to support efficient and reliable decision-making. Currently, I am pursuing the BGIS program, where I am expanding my expertise in spatial analysis, remote sensing, and data automation. I am passionate about applying geospatial technologies to solve real-world problems, optimize workflows, and support sustainable environmental management, while continuously developing my technical and analytical skills.</p>
+  </div>
+
+  <div class="card map-card">
+    <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+    <h3>My Roots: Colombia</h3>
+    <p>I was born and raised in Colombia, a country of incredible biodiversity, rich ecosystems, and diverse landscapes that inspired my passion for environmental engineering and geospatial sciences.</p>
+    <div id="colombiaMap" class="origin-map"></div>
+    <div class="map-caption"><i class="fas fa-location-dot"></i> Bucaramanga, my hometown</div>
+  </div>
+
+  <div id="skills-section" class="grid-2col">
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Core Technical Skills</h3>
+      <div style="margin-bottom: 0.8rem;"><strong>GIS Software</strong><br><span class="skill-badge">ArcGIS Pro</span> <span class="skill-badge">ArcMap</span> <span class="skill-badge">AGOL</span> <span class="skill-badge">QGIS</span> <span class="skill-badge">ArcGIS Enterprise</span> <span class="skill-badge">ArcGIS Field Maps</span> <span class="skill-badge">Blender GIS</span> <span class="skill-badge">GAEA</span> <span class="skill-badge">Google Earth Pro</span> <span class="skill-badge">Google Earth Engine</span> <span class="skill-badge">Unreal Engine 5</span></div>
+      <div style="margin-bottom: 0.8rem;"><strong>Remote Sensing & Raster</strong><br><span class="skill-badge">Landsat/Sentinel-2</span> <span class="skill-badge">NDVI</span> <span class="skill-badge">DEMs</span> <span class="skill-badge">Land cover classification</span> <span class="skill-badge">Vegetation loss analysis</span></div>
+      <div style="margin-bottom: 0.8rem;"><strong>Programming & Automation</strong><br><span class="skill-badge">Python</span> <span class="skill-badge">FME</span> <span class="skill-badge">Model Builder</span> <span class="skill-badge">Arcade</span> <span class="skill-badge">PostgreSQL</span> <span class="skill-badge">SQL Server</span> <span class="skill-badge">VS Code</span> <span class="skill-badge">PyScripter</span> <span class="skill-badge">Microsoft Access</span></div>
+      <div><strong>Data Integrity & Optimization</strong><br>Quality control, traceability, Monte Carlo uncertainty, spreadsheets automation, environmental dataset management (soil, water, air, wastewater).</div>
+    </div>
+    <div class="card">
+      <div class="card-icon"><i class="fas fa-drafting-compass"></i></div>
+      <h3>Cartography & Reporting</h3>
+      <p>Technical reports, statistical analysis, thematic/web maps, Adobe Illustrator, Inkscape, Microsoft Project, Excel advanced, PowerPoint, Word.</p>
+      <hr>
+      <div class="lang-soft">
+        <div><i class="fas fa-language"></i> <strong>Languages</strong><br>English (Full professional)<br>Spanish (Native)</div>
+        <div><i class="fas fa-users"></i> <strong>Soft Skills</strong><br>Results-oriented • Adaptability • Communication<br>Self-learning • Problem solving • Openness to feedback<br>Motivation & curiosity</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="education-section" class="card" style="margin-bottom: 1.5rem;">
+    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+    <h3>Education</h3>
+    <div class="university-logos" style="padding: 1.5rem 2rem;">
+      <div class="uni-logo-item" style="padding: 0.8rem 1.5rem 0.8rem 1rem; gap: 1.2rem;">
+        <img class="uni-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/SAIT_curly_logo.png" alt="SAIT logo" style="width: 68px; height: 68px;">
+        <div class="uni-logo-text" style="font-size: 1.1rem;">Southern Alberta Institute of Technology (SAIT)<small style="font-size: 0.85rem; font-weight: 500;">2025 – Present | Bachelor of Applied Geographic Information Systems (BGIS)</small></div>
+      </div>
+      <div class="uni-logo-item" style="padding: 0.8rem 1.5rem 0.8rem 1rem; gap: 1.2rem;">
+        <img class="uni-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Logos%C3%ADmbolo_UPB.svg/960px-Logos%C3%ADmbolo_UPB.svg.png" alt="Universidad Pontificia Bolivariana logo" style="width: 68px; height: 68px;">
+        <div class="uni-logo-text" style="font-size: 1.1rem;">Universidad Pontificia Bolivariana, Colombia<small style="font-size: 0.85rem; font-weight: 500;">2015 – 2021 | Bachelor's degree in Environmental Engineering</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="experience-section">
+    <div class="section-title"><i class="fas fa-briefcase"></i> Work Experience</div>
+    <div class="card">
+      <div class="exp-item">
+        <div class="exp-title">Environmental and Project Engineer</div>
+        <div class="exp-meta">PSL Proanálisis – Floridablanca, Colombia | May 2022 – Jun 2025</div>
+        <ul class="exp-desc"><li><strong>Data Management:</strong> Standardization and organization of field-collected data using spreadsheets to prevent duplicate records and measurement errors.</li><li><strong>Automation:</strong> Python scripts & Excel macros to ensure data repeatability and quality.</li><li><strong>Uncertainty Analysis:</strong> Spreadsheets for Monte Carlo method during data collection/processing.</li><li><strong>Statistical Analysis:</strong> Estimation of variability, uncertainty, standard deviation on environmental datasets.</li><li><strong>Protected Areas Delimitation:</strong> GIS mapping for mining, energy, urban development decision-making.</li><li><strong>Reporting:</strong> Technical and environmental reports under legal frameworks.</li><li><strong>Research:</strong> Lead researcher in dye removal using fungal strains (textile industry).</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><i class="fas fa-project-diagram"></i> Capstone & Academic Projects</div>
+  <div class="grid-2col">
+    <div class="card"><div class="card-icon"><i class="fas fa-tint"></i></div><h3>Oil Impact Assessment (Capstone)</h3><p><strong>SAIT | Jan 2026 – Present</strong></p><ul class="exp-desc"><li>Standalone Python app using Google Earth Engine to auto-download & process satellite imagery (Landsat/Sentinel-2) for NDVI & vegetation change analysis.</li><li>Integrates multiple GEE datasets, generates interactive maps (HTML), and uses AI models: S2Cloudless for cloud removal + Gemini as interpreter for automated insights.</li><li>Complete packaging with user-friendly GUI – no manual library installation required.</li><li>Interactive map using Python & LandTrendr tool to dynamically visualize vegetation changes.</li></ul></div>
+    <div class="card"><div class="card-icon"><i class="fas fa-water"></i></div><h3>Groundwater Vulnerability Assessment</h3><p><strong>SAIT Environmental Data Analyst | Sep 2025 – Dec 2025</strong></p><ul class="exp-desc"><li>Developed groundwater vulnerability index in Alberta using public data: water wells, permeability, water level, sediment thickness, distance to agriculture.</li><li>Used Sentinel LULC data to identify agricultural zones + buffer & distance analysis.</li><li>Hot Spot & Cold Spot statistical analysis to detect high vulnerability regions.</li><li>Delivered thematic maps + technical report for groundwater protection initiatives.</li></ul></div>
+  </div>
+
+  <div class="card"><div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div><h3>Environmental Engineering Research Experience</h3><div class="exp-item"><div class="exp-title">Vulnerability Index for Transboundary Aquifers (DRASTIC Method)</div><div class="exp-meta">Universidad Pontificia Bolivariana, Colombia | Jan 2021 – Dec 2021</div><ul class="exp-desc"><li>Developed an index to quantify aquifer vulnerability considering natural characteristics and anthropogenic activities.</li><li>GIS analysis with QGIS: elevation model, net recharge, aquifer thickness mapping.</li><li>Geospatial analysis identified regions with higher vulnerability based on DRASTIC variables.</li></ul></div></div>
+
+  <div class="grid-2col" style="margin-top: 1rem;">
+    <div class="card"><div class="card-icon"><i class="fas fa-code"></i></div><h3>Programming & Automation Showcase</h3><ul class="exp-desc"><li><strong>Python & GEE:</strong> Scripted NDVI time-series, raster batch processing, standalone apps.</li><li><strong>FME Workbenches:</strong> Automated data transformation for environmental impact reports.</li><li><strong>SQL Server & PostgreSQL:</strong> Spatial queries, data integrity enforcement.</li><li><strong>ArcGIS Model Builder:</strong> Streamlined suitability analysis workflows.</li><li><strong>Excel Macros & Monte Carlo:</strong> Uncertainty estimation, data quality automation.</li></ul></div>
+    <div class="card"><div class="card-icon"><i class="fas fa-chart-pie"></i></div><h3>Key Achievements</h3><ul class="exp-desc"><li>Reduced data processing time by 35% using Python automation in environmental reports.</li><li>Led geospatial support for 5+ environmental licensing projects in Colombia.</li><li>Created interactive AGOL dashboards for stakeholders to monitor protected areas.</li><li>Monte Carlo uncertainty models increased reliability of field sampling campaigns.</li><li>Lead researcher in fungal dye removal study for textile industry wastewater.</li></ul></div>
+  </div>
+
+  <div id="contact-section" class="footer">
+    <p><i class="fas fa-map-marked-alt"></i> Carlos Pérez — GIS & Environmental Engineering Portfolio - <strong>carlosdanielperez8@gmail.com</strong></p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('colombiaMap').setView([4.5709, -74.2973], 6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
+  L.marker([7.1192, -73.1229]).addTo(map).bindPopup('<b>Bucaramanga</b><br>My hometown, where my journey in environmental engineering began.').openPopup();
+  document.getElementById('contactBtn')?.addEventListener('click', () => { const email = 'carlosdanielperez8@gmail.com'; navigator.clipboard.writeText(email).then(() => alert(`📋 Email copied: ${email}\nYou can now send your message.`)).catch(() => window.location.href = `mailto:${email}?subject=GIS Intern Opportunity&body=Hello Carlos,%0D%0A%0D%0AI came across your portfolio and would like to connect regarding GIS opportunities.`); });
+  document.getElementById('navSkillsBtn')?.addEventListener('click', () => document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.getElementById('navExperienceBtn')?.addEventListener('click', () => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.getElementById('navEducationBtn')?.addEventListener('click', () => document.getElementById('education-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.getElementById('navContactBtn')?.addEventListener('click', () => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  document.getElementById('navProjectsBtn')?.addEventListener('click', () => window.location.href = 'projects.html');
+</script>
+</body>
+</html>

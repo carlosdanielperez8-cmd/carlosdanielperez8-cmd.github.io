@@ -23,17 +23,25 @@
     .media-item:hover { transform: translateY(-4px); }
     .media-item img { width: 100%; height: auto; border-radius: 1rem; border: 1px solid #dce8ef; cursor: pointer; transition: transform 0.2s; }
     .media-item img:active { transform: scale(0.98); }
+    .media-item video { width: 100%; border-radius: 1rem; border: 1px solid #dce8ef; background: #000; }
     .media-caption { font-size: 0.8rem; color: #5a7b8c; margin-top: 0.6rem; }
     .media-caption i { margin-right: 0.3rem; color: #1c6e5e; }
     .footer { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #cbdde6; color: #4f6f7f; font-size: 0.8rem; }
     .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
     .lightbox img { max-width: 90%; max-height: 90%; border-radius: 0.5rem; }
     .lightbox.active { display: flex; }
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .tool-section-title { font-size: 1.6rem; font-weight: 700; color: #0f3b4c; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid #1c6e5e40; display: inline-block; }
+    .tool-card { background: white; border-radius: 2rem; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid #e2edf2; transition: all 0.2s; }
+    .tool-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+    .tool-title { font-size: 1.6rem; font-weight: 700; color: #1c6e5e; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .tool-badge { background: #1c6e5e10; color: #1c6e5e; padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.3px; }
+    .tool-description { color: #2c4b5e; margin: 1rem 0 1.5rem 0; line-height: 1.6; }
+    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem; background: #000; margin-top: 1rem; }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 1rem; }
+    .tool-media { margin-top: 1.2rem; }
     @media (max-width: 700px) {
       .container { padding: 1rem; }
-      .project-title { font-size: 1.4rem; }
+      .project-title, .tool-title { font-size: 1.4rem; }
       .media-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -45,6 +53,7 @@
     <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
   </div>
 
+  <!-- 3D Banff Project Card -->
   <div class="project-card">
     <div class="project-title">
       3D Banff Model - GAEA - Blender
@@ -55,54 +64,161 @@
       <p style="margin-top: 0.6rem;">The DEM was processed in <strong>ArcGIS Pro</strong> and further developed in <strong>Gaea</strong>, where node-based workflows and simulation techniques were used to generate a realistic representation of the terrain and water bodies. The outputs from Gaea were then imported into <strong>Blender</strong> to create a 3D rendering of Banff, complete with dynamic lighting, clouds, and flowing water.</p>
     </div>
 
-    <!-- Sección combinada: GAEA Outputs + Blender Renderings -->
-    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;">
-      <i class="fas fa-cubes"></i> GAEA Outputs & Blender Renderings
-    </h3>
+    <!-- GAEA Outputs Section -->
+    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;"><i class="fas fa-chart-line"></i> GAEA Outputs</h3>
     <div class="media-grid">
-      <!-- Elemento 1: GAEA Terrain -->
       <div class="media-item">
         <img src="assets/banff-terrain.png" alt="Banff 3D Terrain Model - GAEA Visualization" onclick="openLightbox(this.src)">
         <div class="media-caption"><i class="fas fa-image"></i> Terrain Visualization - GAEA Output</div>
       </div>
-      <!-- Elemento 2: GAEA Hydrology -->
       <div class="media-item">
         <img src="assets/banff-hydrology.png" alt="Banff Hydrological Features - Water Bodies Simulation" onclick="openLightbox(this.src)">
         <div class="media-caption"><i class="fas fa-water"></i> Hydrological Features & Water Bodies</div>
       </div>
-      <!-- Elemento 3: GAEA Flyover -->
       <div class="media-item">
         <img src="assets/banff-flyover.png" alt="Banff 3D Flyover - Aerial Perspective" onclick="openLightbox(this.src)">
-        <div class="media-caption"><i class="fas fa-map"></i> 3D Flyover - GAEA Output</div>
+        <div class="media-caption"><i class="fas fa-map"></i> 3D Flyover - Banff Terrain Model</div>
       </div>
-      <!-- Elemento 4: Blender Video (YouTube) -->
+    </div>
+
+    <!-- Blender Renderings Section -->
+    <h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;">
+      <i class="fas fa-cube"></i> Blender Renderings
+    </h3>
+    <div class="media-grid">
       <div class="media-item">
-        <div class="video-container">
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem;">
           <iframe 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
             src="https://www.youtube.com/embed/IrPkpBH2MxA" 
             title="Blender Animation - Banff Flythrough" 
+            frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             referrerpolicy="strict-origin-when-cross-origin" 
             allowfullscreen>
           </iframe>
         </div>
-        <div class="media-caption"><i class="fab fa-youtube"></i> Blender Animation - Banff Flythrough</div>
+        <div class="media-caption">
+          <i class="fab fa-youtube"></i> Blender Animation - Banff Flythrough
+        </div>
       </div>
-      <!-- Elemento 5: Blender Rendering PNG -->
       <div class="media-item">
         <img src="assets/Blend_Banff2.png" alt="Blender 3D Rendering - Banff with Dynamic Lighting" onclick="openLightbox(this.src)">
-        <div class="media-caption"><i class="fas fa-sun"></i> Blender Rendering - Dynamic Lighting & Clouds</div>
+        <div class="media-caption">
+          <i class="fas fa-sun"></i> Blender Rendering - Dynamic Lighting & Clouds
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW SECTION: UNREAL ENGINE 5 + CESIUM – GIS & INTERACTIVE MAP DESIGN -->
+  <div class="project-card">
+    <div class="project-title">
+      Unreal Engine 5 + Cesium – Interactive 3D Models
+      <span class="project-badge"><i class="fab fa-unreal"></i> 3D GIS | Google Earth Engine - Cesium</span>
+    </div>
+    <div class="project-description">
+      <p>Through the use of the Unreal Engine graphics engine and with the support of the Cesium plugin, this engine can be transformed into a GIS tool by leveraging high-resolution imagery repositories from Google Earth Engine for the interactive design of maps. In this case, two major cathedrals are represented: the first is St. Peter's Basilica, and the second is Ulm Minster.</p>
+    </div>
+
+    <!-- Unreal Engine 5 + Cesium Video -->
+    <div class="tool-media">
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/lJwZRHSY8VA" 
+          title="Unreal Engine 5 + Cesium GIS Integration - Cathedral Maps" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="media-caption" style="margin-top: 0.8rem;">
+        <i class="fab fa-youtube"></i> Unreal Engine 5 + Cesium – Real-time flyover and interactive map design
       </div>
     </div>
 
-    <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: #5a7b8c;">
-      <i class="fas fa-info-circle"></i> Click on images to view full size • Video can be played directly
+    <!-- Image Gallery: Ulm Minster & St. Peter's Basilica -->
+    <h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;">
+      <i class="fas fa-landmark"></i> Cathedral Visualization and Rendering Process
+    </h3>
+    <div class="media-grid">
+      <div class="media-item">
+        <img src="assets/U5_ULM.png" alt="Ulm Minster - Unreal Engine 5 + Cesium Visualization" onclick="openLightbox(this.src)">
+        <div class="media-caption">
+          <i class="fas fa-church"></i> Ulm Minster – Germany
+        </div>
+      </div>
+      <div class="media-item">
+        <img src="assets/U5_VAT.png" alt="St. Peter's Basilica - Unreal Engine 5 + Cesium Visualization" onclick="openLightbox(this.src)">
+        <div class="media-caption">
+          <i class="fas fa-church"></i> St. Peter's Basilica – Vatican City
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW SECTION: GIS TOOLS (Standalone Tools) -->
+  <div style="margin-top: 1rem;">
+    <h2 class="tool-section-title"><i class="fas fa-tools" style="color: #1c6e5e; margin-right: 0.6rem;"></i> GIS Standalone Tools</h2>
+    <p style="color: #2c4b5e; margin-bottom: 1.5rem;">Custom-built executable tools integrating satellite imagery, cloud AI, and change detection for non-GIS specialists and analysts.</p>
+  </div>
+
+  <!-- Tool 1: Sentinel & Landsat Imagery Downloader Tool -->
+  <div class="tool-card">
+    <div class="tool-title">
+      Sentinel & Landsat Imagery Downloader Tool
+      <span class="tool-badge"><i class="fas fa-cloud-download-alt"></i> .exe | Earth Engine API</span>
+    </div>
+    <div class="tool-description">
+      <p>This is a standalone tool that enables the processing and automated download of satellite imagery directly from Landsat and Sentinel satellites to obtain NDVI calculated automatically. This is achieved through integration with Google Earth Engine, which allows access to the different image repositories available on the platform. The tool is useful for the rapid visualization of sites of interest and for providing a general understanding of what may be occurring in a given area. Additionally, it generates statistical files related to NDVI. The tool was packaged into a .exe file so that non-GIS users and those without Python installed can use it easily.</p>
+    </div>
+    <div class="tool-media">
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/wruOd4VnoNE" 
+          title="Sentinel & Landsat Imagery Downloader Tool Demo" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="media-caption" style="margin-top: 0.8rem;">
+        <i class="fab fa-youtube"></i> Sentinel & Landsat Downloader + NDVI Automation – Demonstration
+      </div>
+    </div>
+  </div>
+
+  <!-- Tool 2: Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance -->
+  <div class="tool-card">
+    <div class="tool-title">
+      Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance
+      <span class="tool-badge"><i class="fas fa-robot"></i> AI Cloud Removal | HTML Maps | TIF Export</span>
+    </div>
+    <div class="tool-description">
+      <p>This second standalone tool allows the end user to process images from the Sentinel satellite through integration with Google Earth Engine, providing access to the available image repositories. As a result, it generates an interactive HTML map that displays vegetation changes over different periods of time. Additionally, it downloads TIF files so they can be used and analyzed in ArcGIS Pro.</p>
+      <p style="margin-top: 0.6rem;">This tool employs artificial intelligence in two ways: first, to remove clouds from Sentinel-2 images, and second, as a results interpreter that facilitates the reading and understanding of the data for users who are not familiar with GIS.</p>
+    </div>
+    <div class="tool-media">
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/RINQtlN4xPc" 
+          title="Vegetation Change Detection & AI Assistant Tool Demo" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="media-caption" style="margin-top: 0.8rem;">
+        <i class="fab fa-youtube"></i> Change Detection + AI Cloud Removal & Smart Interpretation
+      </div>
     </div>
   </div>
 
   <div class="footer">
-    <p><i class="fas fa-map-marked-alt"></i> Carlos Pérez — GIS & Environmental Engineering Portfolio — <strong>carlosdanielperez8@gmail.com</strong></p>
-    <p style="margin-top: 0.5rem;"><a href="index.html" style="color: #1c6e5e; text-decoration: none;">← Return to main page</a></p>
+    <i class="fas fa-globe-americas"></i> Carlos Pérez – GIS & Remote Sensing Portfolio | Innovative tools for Earth observation
   </div>
 </div>
 

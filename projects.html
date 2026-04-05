@@ -30,7 +30,7 @@
     .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
     .lightbox img { max-width: 90%; max-height: 90%; border-radius: 0.5rem; }
     .lightbox.active { display: flex; }
-    .tool-section-title { font-size: 1.6rem; font-weight: 700; color: #0f3b4c; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid #1c6e5e40; display: inline-block; }
+    .tool-section-title { font-size: 1.6rem; font-weight: 700; color: #0f3b4c; margin: 0 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid #1c6e5e40; display: inline-block; }
     .tool-card { background: white; border-radius: 2rem; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid #e2edf2; transition: all 0.2s; }
     .tool-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
     .tool-title { font-size: 1.6rem; font-weight: 700; color: #1c6e5e; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
@@ -39,10 +39,14 @@
     .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1rem; background: #000; margin-top: 1rem; }
     .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 1rem; }
     .tool-media { margin-top: 1.2rem; }
+    .tools-container { margin-top: 0; }
+    .map-wrapper { position: relative; padding-bottom: 65%; height: 0; overflow: hidden; border-radius: 1rem; background: #e9ecef; margin-top: 1rem; border: 1px solid #dce8ef; }
+    .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 1rem; }
     @media (max-width: 700px) {
       .container { padding: 1rem; }
       .project-title, .tool-title { font-size: 1.4rem; }
       .media-grid { grid-template-columns: 1fr; }
+      .map-wrapper { padding-bottom: 75%; }
     }
   </style>
 </head>
@@ -53,7 +57,7 @@
     <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
   </div>
 
-  <!-- 3D Banff Project Card -->
+  <!-- SECTION 1: 3D Banff Model - GAEA - Blender -->
   <div class="project-card">
     <div class="project-title">
       3D Banff Model - GAEA - Blender
@@ -64,7 +68,6 @@
       <p style="margin-top: 0.6rem;">The DEM was processed in <strong>ArcGIS Pro</strong> and further developed in <strong>Gaea</strong>, where node-based workflows and simulation techniques were used to generate a realistic representation of the terrain and water bodies. The outputs from Gaea were then imported into <strong>Blender</strong> to create a 3D rendering of Banff, complete with dynamic lighting, clouds, and flowing water.</p>
     </div>
 
-    <!-- GAEA Outputs Section -->
     <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;"><i class="fas fa-chart-line"></i> GAEA Outputs</h3>
     <div class="media-grid">
       <div class="media-item">
@@ -81,7 +84,6 @@
       </div>
     </div>
 
-    <!-- Blender Renderings Section -->
     <h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;">
       <i class="fas fa-cube"></i> Blender Renderings
     </h3>
@@ -111,7 +113,7 @@
     </div>
   </div>
 
-  <!-- NEW SECTION: UNREAL ENGINE 5 + CESIUM – GIS & INTERACTIVE MAP DESIGN -->
+  <!-- SECTION 2: Unreal Engine 5 + Cesium – Interactive 3D Models -->
   <div class="project-card">
     <div class="project-title">
       Unreal Engine 5 + Cesium – Interactive 3D Models
@@ -121,7 +123,6 @@
       <p>Through the use of the Unreal Engine graphics engine and with the support of the Cesium plugin, this engine can be transformed into a GIS tool by leveraging high-resolution imagery repositories from Google Earth Engine for the interactive design of maps. In this case, two major cathedrals are represented: the first is St. Peter's Basilica, and the second is Ulm Minster.</p>
     </div>
 
-    <!-- Unreal Engine 5 + Cesium Video -->
     <div class="tool-media">
       <div class="video-wrapper">
         <iframe 
@@ -138,7 +139,6 @@
       </div>
     </div>
 
-    <!-- Image Gallery: Ulm Minster & St. Peter's Basilica -->
     <h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;">
       <i class="fas fa-landmark"></i> Cathedral Visualization and Rendering Process
     </h3>
@@ -158,61 +158,142 @@
     </div>
   </div>
 
-  <!-- NEW SECTION: GIS TOOLS (Standalone Tools) -->
-  <div style="margin-top: 1rem;">
+  <!-- SECTION 3: GIS Standalone Tools -->
+  <div class="tools-container">
     <h2 class="tool-section-title"><i class="fas fa-tools" style="color: #1c6e5e; margin-right: 0.6rem;"></i> GIS Standalone Tools</h2>
     <p style="color: #2c4b5e; margin-bottom: 1.5rem;">Custom-built executable tools integrating satellite imagery, cloud AI, and change detection for non-GIS specialists and analysts.</p>
+
+    <!-- Tool 1: Sentinel & Landsat Imagery Downloader Tool -->
+    <div class="tool-card">
+      <div class="tool-title">
+        Sentinel & Landsat Imagery Downloader Tool
+        <span class="tool-badge"><i class="fas fa-cloud-download-alt"></i> .exe | Earth Engine API</span>
+      </div>
+      <div class="tool-description">
+        <p>This is a standalone tool that enables the processing and automated download of satellite imagery directly from Landsat and Sentinel satellites to obtain NDVI calculated automatically. This is achieved through integration with Google Earth Engine, which allows access to the different image repositories available on the platform. The tool is useful for the rapid visualization of sites of interest and for providing a general understanding of what may be occurring in a given area. Additionally, it generates statistical files related to NDVI. The tool was packaged into a .exe file so that non-GIS users and those without Python installed can use it easily.</p>
+      </div>
+      <div class="tool-media">
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/wruOd4VnoNE" 
+            title="Sentinel & Landsat Imagery Downloader Tool Demo" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="media-caption" style="margin-top: 0.8rem;">
+          <i class="fab fa-youtube"></i> Sentinel & Landsat Downloader + NDVI Automation – Demonstration
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 2: Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance -->
+    <div class="tool-card">
+      <div class="tool-title">
+        Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance
+        <span class="tool-badge"><i class="fas fa-robot"></i> AI Cloud Removal | HTML Maps | TIF Export</span>
+      </div>
+      <div class="tool-description">
+        <p>This second standalone tool allows the end user to process images from the Sentinel satellite through integration with Google Earth Engine, providing access to the available image repositories. As a result, it generates an interactive HTML map that displays vegetation changes over different periods of time. Additionally, it downloads TIF files so they can be used and analyzed in ArcGIS Pro.</p>
+        <p style="margin-top: 0.6rem;">This tool employs artificial intelligence in two ways: first, to remove clouds from Sentinel-2 images, and second, as a results interpreter that facilitates the reading and understanding of the data for users who are not familiar with GIS.</p>
+      </div>
+      <div class="tool-media">
+        <div class="video-wrapper">
+          <iframe 
+            src="https://www.youtube.com/embed/RINQtlN4xPc" 
+            title="Vegetation Change Detection & AI Assistant Tool Demo" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="media-caption" style="margin-top: 0.8rem;">
+          <i class="fab fa-youtube"></i> Change Detection + AI Cloud Removal & Smart Interpretation
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Tool 1: Sentinel & Landsat Imagery Downloader Tool -->
-  <div class="tool-card">
-    <div class="tool-title">
-      Sentinel & Landsat Imagery Downloader Tool
-      <span class="tool-badge"><i class="fas fa-cloud-download-alt"></i> .exe | Earth Engine API</span>
+  <!-- SECTION 4: California - Spatial Distribution of White People in California -->
+  <div class="project-card">
+    <div class="project-title">
+      Spatial Distribution of White People in California
+      <span class="project-badge"><i class="fas fa-chart-pie"></i> Demographic Patterns | Cartographic Visualization</span>
     </div>
-    <div class="tool-description">
-      <p>This is a standalone tool that enables the processing and automated download of satellite imagery directly from Landsat and Sentinel satellites to obtain NDVI calculated automatically. This is achieved through integration with Google Earth Engine, which allows access to the different image repositories available on the platform. The tool is useful for the rapid visualization of sites of interest and for providing a general understanding of what may be occurring in a given area. Additionally, it generates statistical files related to NDVI. The tool was packaged into a .exe file so that non-GIS users and those without Python installed can use it easily.</p>
+    <div class="project-description">
+      <p>This map aims to illustrate the spatial patterns in the distribution of the White population in the state of California, United States. It shows a clear pattern in which populations are more concentrated toward the northern region of the state, while this percentage decreases noticeably toward the south. These types of maps make it possible to visualize demographic patterns in a simple and highly understandable way.</p>
     </div>
-    <div class="tool-media">
-      <div class="video-wrapper">
-        <iframe 
-          src="https://www.youtube.com/embed/wruOd4VnoNE" 
-          title="Sentinel & Landsat Imagery Downloader Tool Demo" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" 
-          allowfullscreen>
-        </iframe>
-      </div>
-      <div class="media-caption" style="margin-top: 0.8rem;">
-        <i class="fab fa-youtube"></i> Sentinel & Landsat Downloader + NDVI Automation – Demonstration
+
+    <div class="media-grid">
+      <div class="media-item">
+        <img src="assets/California.jpg" alt="Spatial Distribution of White Population in California" onclick="openLightbox(this.src)">
+        <div class="media-caption">
+          <i class="fas fa-users"></i> Percentage of White Population by County – California
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Tool 2: Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance -->
-  <div class="tool-card">
-    <div class="tool-title">
-      Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance
-      <span class="tool-badge"><i class="fas fa-robot"></i> AI Cloud Removal | HTML Maps | TIF Export</span>
+  <!-- SECTION 5: Distribution of Aviation Accidents in California -->
+  <div class="project-card">
+    <div class="project-title">
+      Distribution of Aviation Accidents in California
+      <span class="project-badge"><i class="fas fa-plane-crash"></i> Aviation Safety | Spatial Analysis | ArcGIS Dashboard</span>
     </div>
-    <div class="tool-description">
-      <p>This second standalone tool allows the end user to process images from the Sentinel satellite through integration with Google Earth Engine, providing access to the available image repositories. As a result, it generates an interactive HTML map that displays vegetation changes over different periods of time. Additionally, it downloads TIF files so they can be used and analyzed in ArcGIS Pro.</p>
-      <p style="margin-top: 0.6rem;">This tool employs artificial intelligence in two ways: first, to remove clouds from Sentinel-2 images, and second, as a results interpreter that facilitates the reading and understanding of the data for users who are not familiar with GIS.</p>
+    <div class="project-description">
+      <p>One of the states with the highest number of aviation accidents involving aircraft is the state of California, with approximately more than 600 accidents recorded between 2000 and 2025. The distribution and frequency of aviation accidents occurring in this state are closely linked to the numerous airports and private flights operating daily in California, as well as to the complex geography of the region. The following map illustrates some of these incidents. ✈️🗺️</p>
     </div>
-    <div class="tool-media">
-      <div class="video-wrapper">
-        <iframe 
-          src="https://www.youtube.com/embed/RINQtlN4xPc" 
-          title="Vegetation Change Detection & AI Assistant Tool Demo" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" 
-          allowfullscreen>
-        </iframe>
+
+    <!-- Interactive ArcGIS Map Embed -->
+    <div class="map-wrapper">
+      <iframe 
+        src="https://experience.arcgis.com/builder/?id=3c455d4b89ea429caec86ca124256234&views=page" 
+        title="ArcGIS Experience Builder - Aviation Accidents in California" 
+        frameborder="0" 
+        allow="fullscreen; geolocation; clipboard-write" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="media-caption" style="margin-top: 0.8rem; text-align: center;">
+      <i class="fas fa-map-marked-alt"></i> Interactive map – Aviation accident incidents in California (2000–2025)
+    </div>
+  </div>
+
+  <!-- SECTION 6: Groundwater Vulnerability Assessment -->
+  <div class="project-card">
+    <div class="project-title">
+      Groundwater Vulnerability Assessment
+      <span class="project-badge"><i class="fas fa-tint"></i> Hydrogeology | Real-Time Monitoring | Alberta, Canada</span>
+    </div>
+    <div class="project-description">
+      <p>Maps used for the Groundwater Vulnerability Assessment, in which various natural variables and land classification were considered to determine the vulnerability of several water wells equipped with real-time water quality monitoring systems. These wells are located throughout the province of Alberta, Canada.</p>
+      <p style="margin-top: 0.6rem;">The assessment integrates hydrogeological data, land use classification, and intrinsic aquifer susceptibility to produce a comprehensive vulnerability index. This helps in protecting critical groundwater resources and supports decision-making for sustainable water management.</p>
+    </div>
+
+    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;">
+      <i class="fas fa-map"></i> Vulnerability Assessment Maps
+    </h3>
+    <div class="media-grid">
+      <div class="media-item">
+        <img src="assets/AB.jpg" alt="Groundwater Vulnerability Map - Alberta Overview" onclick="openLightbox(this.src)">
+        <div class="media-caption">
+          <i class="fas fa-draw-polygon"></i> Alberta Groundwater Vulnerability - Regional Index
+        </div>
       </div>
-      <div class="media-caption" style="margin-top: 0.8rem;">
-        <i class="fab fa-youtube"></i> Change Detection + AI Cloud Removal & Smart Interpretation
+      <div class="media-item">
+        <img src="assets/AB2.jpg" alt="Detailed Vulnerability Zones and Well Monitoring Sites" onclick="openLightbox(this.src)">
+        <div class="media-caption">
+          <i class="fas fa-chart-line"></i> Vulnerability Zones & Real-Time Well Monitoring Sites
+        </div>
+      </div>
+      <div class="media-item">
+        <img src="assets/AB3.jpg" alt="Integrated Natural Variables and Land Classification" onclick="openLightbox(this.src)">
+        <div class="media-caption">
+          <i class="fas fa-layer-group"></i> Integrated Variables: Land Use, Aquifer Susceptibility & Hydrogeology
+        </div>
       </div>
     </div>
   </div>

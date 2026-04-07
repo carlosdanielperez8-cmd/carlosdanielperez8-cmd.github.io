@@ -52,8 +52,8 @@
     .nav-btn.projects-btn i { color: white; }
     .nav-btn.projects-btn:hover { background: #0f4f43; transform: translateY(-3px); }
     .map-card { margin-bottom: 1.5rem; }
-    .origin-map { height: 280px; width: 100%; border-radius: 1rem; overflow: hidden; margin-top: 1rem; border: 1px solid #dce8ef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .map-caption { font-size: 0.8rem; color: #4f6f7f; text-align: center; margin-top: 0.5rem; }
+    .origin-map { height: 380px; width: 100%; border-radius: 1rem; overflow: hidden; margin-top: 1rem; border: 1px solid #dce8ef; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    .map-caption { font-size: 0.85rem; color: #2c5a6e; text-align: center; margin-top: 0.6rem; background: #eef3f7; display: inline-block; padding: 0.3rem 1rem; border-radius: 40px; width: auto; margin-left: auto; margin-right: auto; }
     @media (max-width: 700px) {
       .hero-info h1 { font-size: 2rem; }
       .container { padding: 1rem; }
@@ -63,7 +63,7 @@
       .uni-logo-text { font-size: 0.75rem; }
       .nav-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
       .profile-img { width: 140px; height: 140px; }
-      .origin-map { height: 220px; }
+      .origin-map { height: 280px; }
     }
   </style>
 </head>
@@ -180,10 +180,49 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  const map = L.map('colombiaMap').setView([4.5709, -74.2973], 6);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
-  L.marker([7.1192, -73.1229]).addTo(map).bindPopup('<b>Bucaramanga</b><br>My hometown, where my journey in environmental engineering began.').openPopup();
-  document.getElementById('contactBtn')?.addEventListener('click', () => { const email = 'carlosdanielperez8@gmail.com'; navigator.clipboard.writeText(email).then(() => alert(`📋 Email copied: ${email}\nYou can now send your message.`)).catch(() => window.location.href = `mailto:${email}?subject=GIS Intern Opportunity&body=Hello Carlos,%0D%0A%0D%0AI came across your portfolio and would like to connect regarding GIS opportunities.`); });
+  // Hybrid map with satellite imagery + labels (ESRI World Imagery with Labels overlay)
+  const map = L.map('colombiaMap').setView([7.1192, -73.1229], 12);
+  
+  // Base hybrid layer: ESRI World Imagery (satellite)
+  const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    maxZoom: 5
+  });
+  
+  // Labels overlay for places, streets, and geographic names
+  const esriLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Places &copy; Esri',
+    maxZoom: 5,
+    opacity: 0.9
+  });
+  
+  esriSatellite.addTo(map);
+  esriLabels.addTo(map);
+  
+  // Custom marker for Bucaramanga
+  const customIcon = L.divIcon({
+    html: '<div style="background: #ffb347; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 2px solid white;"><i class="fas fa-map-marker-alt" style="font-size: 18px; color: #1a2c3e;"></i></div>',
+    iconSize: [36, 36],
+    popupAnchor: [0, -18],
+    className: 'custom-marker'
+  });
+  
+  L.marker([7.1192, -73.1229], { icon: customIcon }).addTo(map)
+    .bindPopup(`
+      <b>🏙️ Bucaramanga</b><br>
+      <i>My hometown</i><br>
+      Known as "La Ciudad Bonita" (The Beautiful City)
+    `)
+    .openPopup();
+  
+  // Add a subtle scale bar for cartographic reference
+  L.control.scale({ metric: true, imperial: false, position: 'bottomleft' }).addTo(map);
+  
+  // Navigation buttons event listeners
+  document.getElementById('contactBtn')?.addEventListener('click', () => { 
+    const email = 'carlosdanielperez8@gmail.com'; 
+    navigator.clipboard.writeText(email).then(() => alert(`📋 Email copied: ${email}\nYou can now send your message.`)).catch(() => window.location.href = `mailto:${email}?subject=GIS Intern Opportunity&body=Hello Carlos,%0D%0A%0D%0AI came across your portfolio and would like to connect regarding GIS opportunities.`); 
+  });
   document.getElementById('navSkillsBtn')?.addEventListener('click', () => document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   document.getElementById('navExperienceBtn')?.addEventListener('click', () => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   document.getElementById('navEducationBtn')?.addEventListener('click', () => document.getElementById('education-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));

@@ -6,7 +6,7 @@
   <title>Carlos Pérez | GIS & Environmental Engineering Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #f4f7fc; color: #1a2c3e; line-height: 1.5; scroll-behavior: smooth; }
@@ -51,98 +51,9 @@
     .nav-btn.projects-btn { background: #1c6e5e; color: white; }
     .nav-btn.projects-btn i { color: white; }
     .nav-btn.projects-btn:hover { background: #0f4f43; transform: translateY(-3px); }
-    
-    .roots-map-card { 
-      background: white; 
-      border-radius: 1.5rem; 
-      padding: 1.5rem; 
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
-      border: 1px solid #e2edf2;
-      margin-bottom: 1.5rem;
-      transition: transform 0.2s ease, box-shadow 0.2s;
-    }
-    .roots-map-card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1); }
-    .roots-map-container { 
-      width: 100%; 
-      height: 480px; 
-      position: relative; 
-      border-radius: 1rem; 
-      overflow: hidden; 
-      margin-top: 1rem; 
-      border: 1px solid #dce8ef;
-      background: #f0f5f4;
-    }
-    .roots-map-caption { 
-      font-size: 0.75rem; 
-      color: #5a7b8c; 
-      text-align: center; 
-      margin-top: 0.75rem; 
-      letter-spacing: 0.3px;
-    }
-    .roots-map-caption i { margin-right: 4px; color: #1c6e5e; }
-    
-    .explorer-weather-bar {
-      background: linear-gradient(135deg, #1a73e8, #0d47a1);
-      color: white;
-      padding: 10px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .explorer-weather-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .explorer-weather-icon {
-      font-size: 28px;
-    }
-    .explorer-temp {
-      font-size: 24px;
-      font-weight: 700;
-    }
-    .explorer-condition {
-      font-size: 12px;
-      opacity: 0.9;
-      margin-left: 6px;
-    }
-    .explorer-stats {
-      display: flex;
-      gap: 18px;
-      font-size: 12px;
-    }
-    .explorer-select {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      padding: 6px 14px;
-      border-radius: 40px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-      font-family: 'Inter', sans-serif;
-    }
-    .explorer-select option {
-      color: #1a2c3e;
-      background: white;
-    }
-    .explorer-map-canvas {
-      width: 100%;
-      height: 380px;
-      background: #e9f0f5;
-    }
-    .explorer-footer {
-      font-size: 10px;
-      text-align: center;
-      padding: 8px;
-      background: #f8fafc;
-      color: #5e7e92;
-      border-top: 1px solid #e2edf2;
-    }
-    
+    .map-card { margin-bottom: 1.5rem; }
+    .origin-map { height: 280px; width: 100%; border-radius: 1rem; overflow: hidden; margin-top: 1rem; border: 1px solid #dce8ef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .map-caption { font-size: 0.8rem; color: #4f6f7f; text-align: center; margin-top: 0.5rem; }
     @media (max-width: 700px) {
       .hero-info h1 { font-size: 2rem; }
       .container { padding: 1rem; }
@@ -152,10 +63,7 @@
       .uni-logo-text { font-size: 0.75rem; }
       .nav-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
       .profile-img { width: 140px; height: 140px; }
-      .roots-map-container { height: 420px; }
-      .explorer-map-canvas { height: 320px; }
-      .explorer-weather-bar { flex-direction: column; align-items: stretch; }
-      .explorer-stats { justify-content: space-between; }
+      .origin-map { height: 220px; }
     }
   </style>
 </head>
@@ -197,15 +105,12 @@
     <p>I am an Environmental Engineer from Colombia with over three years of professional experience in environmental projects and engineering. My background combines environmental science, project management, and technical problem-solving using Geographic Information Systems (GIS) and programming tools such as Python, ArcGIS, SQL, and FME. I have experience in automating geospatial workflows, verifying spatial data quality, and producing cartographic outputs to support efficient and reliable decision-making. Currently, I am pursuing the BGIS program, where I am expanding my expertise in spatial analysis, remote sensing, and data automation. I am passionate about applying geospatial technologies to solve real-world problems, optimize workflows, and support sustainable environmental management, while continuously developing my technical and analytical skills.</p>
   </div>
 
-  <div class="roots-map-card">
+  <div class="card map-card">
     <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
     <h3>My Roots: Colombia</h3>
     <p>I was born and raised in Colombia, a country of incredible biodiversity, rich ecosystems, and diverse landscapes that inspired my passion for environmental engineering and geospatial sciences.</p>
-    
-    <div class="roots-map-container" id="bucaramangaExplorerRoots"></div>
-    <div class="roots-map-caption">
-      <i class="fas fa-location-dot"></i> Bucaramanga · Real-time weather | Interactive places: malls, parks, hotels, universities, restaurants & viewpoints
-    </div>
+    <div id="colombiaMap" class="origin-map"></div>
+    <div class="map-caption"><i class="fas fa-location-dot"></i> Bucaramanga, my hometown</div>
   </div>
 
   <div id="skills-section" class="grid-2col">
@@ -273,199 +178,11 @@
   </div>
 </div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // ======================== BUCARAMANGA EXPLORER (ROOTS SECTION) ========================
-  (function() {
-    const GOOGLE_API_KEY = "AIzaSyCmnvo24aS2SZOoGkld09dbQ7duJS58KWU";
-    const BUCARAMANGA_CENTER = { lat: 7.1193, lng: -73.1227 };
-    
-    const container = document.getElementById('bucaramangaExplorerRoots');
-    if (!container) return;
-    
-    container.innerHTML = `
-      <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
-        <div class="explorer-weather-bar">
-          <div class="explorer-weather-info">
-            <span class="explorer-weather-icon" id="rootsWeatherIcon">🌤️</span>
-            <div><span class="explorer-temp" id="rootsTemp">--°C</span><span class="explorer-condition" id="rootsCondition">Loading...</span></div>
-          </div>
-          <div class="explorer-stats">
-            <span>💧 <span id="rootsHumidity">--</span>%</span>
-            <span>💨 <span id="rootsWind">--</span> km/h</span>
-          </div>
-          <select class="explorer-select" id="rootsCategorySelect">
-            <option value="">📌 Explore places</option>
-            <option value="shopping_mall">🛍️ Shopping Malls</option>
-            <option value="park">🌳 Parks</option>
-            <option value="lodging">🏨 Hotels</option>
-            <option value="university">🎓 Universities</option>
-            <option value="restaurant">🍽️ Restaurants</option>
-            <option value="tourist_attraction">🏞️ Viewpoints</option>
-          </select>
-        </div>
-        <div class="explorer-map-canvas" id="rootsMapCanvas"></div>
-        <div class="explorer-footer">
-          📍 Bucaramanga · Click on any marker for details
-        </div>
-      </div>
-    `;
-    
-    let map;
-    let markers = [];
-    let infoWindow;
-    let placesService;
-    let isMapReady = false;
-    
-    const categoryLabels = {
-      'shopping_mall': 'Shopping Malls',
-      'park': 'Parks',
-      'lodging': 'Hotels',
-      'university': 'Universities',
-      'restaurant': 'Restaurants',
-      'tourist_attraction': 'Viewpoints'
-    };
-    
-    function getWeatherIcon(wmoCode, isDay = true) {
-      if (wmoCode === 0) return isDay ? '☀️' : '🌙';
-      if (wmoCode === 1 || wmoCode === 2) return isDay ? '⛅' : '☁️';
-      if (wmoCode === 3) return '☁️';
-      if (wmoCode >= 45 && wmoCode <= 48) return '🌫️';
-      if (wmoCode >= 51 && wmoCode <= 57) return '🌦️';
-      if (wmoCode >= 61 && wmoCode <= 67) return '🌧️';
-      if (wmoCode >= 71 && wmoCode <= 77) return '❄️';
-      if (wmoCode >= 80 && wmoCode <= 82) return '🌧️';
-      if (wmoCode >= 95 && wmoCode <= 99) return '⛈️';
-      return isDay ? '🌡️' : '🌙';
-    }
-    
-    function getConditionName(wmoCode) {
-      if (wmoCode === 0) return 'Clear';
-      if (wmoCode === 1 || wmoCode === 2) return 'Partly cloudy';
-      if (wmoCode === 3) return 'Cloudy';
-      if (wmoCode >= 45 && wmoCode <= 48) return 'Fog';
-      if (wmoCode >= 51 && wmoCode <= 57) return 'Drizzle';
-      if (wmoCode >= 61 && wmoCode <= 67) return 'Rain';
-      if (wmoCode >= 71 && wmoCode <= 77) return 'Snow';
-      if (wmoCode >= 80 && wmoCode <= 82) return 'Showers';
-      if (wmoCode >= 95 && wmoCode <= 99) return 'Thunderstorm';
-      return 'Variable';
-    }
-    
-    function isDayTime() { const hour = new Date().getHours(); return hour >= 6 && hour < 18; }
-    
-    async function fetchWeather() {
-      try {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=7.1193&longitude=-73.1227&current_weather=true&hourly=relative_humidity_2m&timezone=auto`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data && data.current_weather) {
-          const temp = Math.round(data.current_weather.temperature);
-          const wmo = data.current_weather.weathercode;
-          const isDay = isDayTime();
-          const icon = getWeatherIcon(wmo, isDay);
-          const condition = getConditionName(wmo);
-          let humidity = '--';
-          if (data.hourly && data.hourly.relative_humidity_2m && data.hourly.relative_humidity_2m[0]) humidity = data.hourly.relative_humidity_2m[0];
-          const wind = data.current_weather.windspeed || '--';
-          
-          const iconEl = document.getElementById('rootsWeatherIcon');
-          const tempEl = document.getElementById('rootsTemp');
-          const condEl = document.getElementById('rootsCondition');
-          const humEl = document.getElementById('rootsHumidity');
-          const windEl = document.getElementById('rootsWind');
-          
-          if (iconEl) iconEl.innerHTML = icon;
-          if (tempEl) tempEl.innerHTML = `${temp}°C`;
-          if (condEl) condEl.innerHTML = condition;
-          if (humEl) humEl.innerHTML = humidity;
-          if (windEl) windEl.innerHTML = wind;
-        }
-      } catch(e) { console.warn("Weather error:", e); }
-    }
-    
-    function clearMarkers() {
-      markers.forEach(m => m.setMap(null));
-      markers = [];
-    }
-    
-    function searchPlaces(category) {
-      if (!isMapReady || !placesService || !category) { clearMarkers(); return; }
-      clearMarkers();
-      const request = { location: BUCARAMANGA_CENTER, radius: 3500, type: category };
-      placesService.nearbySearch(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && results?.length) {
-          results.slice(0, 18).forEach(place => {
-            if (!place.geometry?.location) return;
-            const marker = new google.maps.Marker({ map, position: place.geometry.location, title: place.name, animation: google.maps.Animation.DROP });
-            marker.addListener('click', () => {
-              const detailReq = { placeId: place.place_id, fields: ['name', 'formatted_address', 'rating', 'user_ratings_total', 'website', 'phone_number'] };
-              placesService.getDetails(detailReq, (details, detStatus) => {
-                let content = `<div style="font-family:Inter;max-width:260px;padding:6px;"><strong style="color:#1b5e3f;">${place.name}</strong><br><span style="font-size:0.75rem;">${place.vicinity || ''}</span><br>`;
-                if (place.rating) content += `<span>⭐ ${place.rating} ${place.user_ratings_total ? `(${place.user_ratings_total} reviews)` : ''}</span><br>`;
-                if (details && detStatus === 'OK') {
-                  if (details.formatted_address) content += `📍 ${details.formatted_address}<br>`;
-                  if (details.phone_number) content += `📞 ${details.phone_number}<br>`;
-                  if (details.website) content += `<a href="${details.website}" target="_blank" style="color:#2c9d8a;">🌐 Visit website</a>`;
-                }
-                content += `</div>`;
-                if (infoWindow) infoWindow.close();
-                infoWindow.setContent(content);
-                infoWindow.open(map, marker);
-              });
-            });
-            markers.push(marker);
-          });
-          const bounds = new google.maps.LatLngBounds();
-          markers.forEach(m => bounds.extend(m.getPosition()));
-          map.fitBounds(bounds);
-          setTimeout(() => map.getZoom() > 15 && map.setZoom(14.2), 100);
-        } else {
-          const noMsg = new google.maps.InfoWindow({ content: `<div style="padding:8px;">⚠️ No ${categoryLabels[category] || category} found nearby</div>`, position: BUCARAMANGA_CENTER });
-          noMsg.open(map);
-          setTimeout(() => noMsg.close(), 2000);
-        }
-      });
-    }
-    
-    window.initRootsMap = function() {
-      const mapCanvas = document.getElementById('rootsMapCanvas');
-      if (!mapCanvas) return;
-      map = new google.maps.Map(mapCanvas, { 
-        center: BUCARAMANGA_CENTER, 
-        zoom: 5,
-	mapTypeId: google.maps.MapTypeId.HYBRID, 
-        mapTypeControl: true, 
-        fullscreenControl: false, 
-        streetViewControl: true, 
-        zoomControl: true 
-      });
-      infoWindow = new google.maps.InfoWindow();
-      placesService = new google.maps.places.PlacesService(map);
-      isMapReady = true;
-      
-      const welcomeMarker = new google.maps.Marker({ position: BUCARAMANGA_CENTER, map, title: "Bucaramanga", icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' });
-      welcomeMarker.addListener('click', () => {
-        infoWindow.setContent('<div style="padding:6px;"><strong>Bucaramanga, Colombia</strong><br>My hometown — the city of parks!</div>');
-        infoWindow.open(map, welcomeMarker);
-      });
-      
-      const selectEl = document.getElementById('rootsCategorySelect');
-      if (selectEl) {
-        selectEl.addEventListener('change', (e) => { if (e.target.value) searchPlaces(e.target.value); else clearMarkers(); });
-      }
-      
-      fetchWeather();
-      setInterval(fetchWeather, 600000);
-    };
-    
-    // Load Google Maps API with English language parameter
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&callback=initRootsMap&v=weekly&language=en`;
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-  })();
-  
+  const map = L.map('colombiaMap').setView([4.5709, -74.2973], 6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
+  L.marker([7.1192, -73.1229]).addTo(map).bindPopup('<b>Bucaramanga</b><br>My hometown, where my journey in environmental engineering began.').openPopup();
   document.getElementById('contactBtn')?.addEventListener('click', () => { const email = 'carlosdanielperez8@gmail.com'; navigator.clipboard.writeText(email).then(() => alert(`📋 Email copied: ${email}\nYou can now send your message.`)).catch(() => window.location.href = `mailto:${email}?subject=GIS Intern Opportunity&body=Hello Carlos,%0D%0A%0D%0AI came across your portfolio and would like to connect regarding GIS opportunities.`); });
   document.getElementById('navSkillsBtn')?.addEventListener('click', () => document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   document.getElementById('navExperienceBtn')?.addEventListener('click', () => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));

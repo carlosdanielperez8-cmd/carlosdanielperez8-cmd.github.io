@@ -19,6 +19,9 @@
     .hero-details i { margin-right: 0.5rem; width: 1.2rem; }
     .btn-contact { background: #ffb347; color: #1a2c3e; border: none; padding: 0.7rem 1.5rem; border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; transition: 0.2s; }
     .btn-contact:hover { background: #ff9f1a; transform: scale(1.02); }
+    /* Estilo específico para el botón de descarga de CV, manteniendo coherencia visual */
+    .btn-download-cv { background: #2c7a5e; color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; transition: 0.2s; margin-left: 0.8rem; }
+    .btn-download-cv:hover { background: #1e5a45; transform: scale(1.02); }
     .hero-photo { flex-shrink: 0; }
     .profile-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease, border-color 0.3s ease; }
     .profile-img:hover { transform: scale(1.02); border-color: #ffb347; }
@@ -64,6 +67,8 @@
       .nav-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
       .profile-img { width: 140px; height: 140px; }
       .origin-map { height: 280px; }
+      .btn-download-cv { margin-left: 0; margin-top: 0.5rem; }
+      .hero-details { flex-direction: column; gap: 0.5rem; }
     }
   </style>
 </head>
@@ -87,7 +92,11 @@
           <span><i class="fas fa-phone-alt"></i> 587-438-7249</span>
           <span><i class="fas fa-envelope"></i> carlosdanielperez8@gmail.com</span>
         </div>
-        <button class="btn-contact" id="contactBtn"><i class="fas fa-paper-plane"></i> Contact me by email</button>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+          <button class="btn-contact" id="contactBtn"><i class="fas fa-paper-plane"></i> Contact me by email</button>
+          <!-- Botón para descargar el CV agregado aquí -->
+          <button class="btn-download-cv" id="downloadCvBtn"><i class="fas fa-download"></i> Download CV (DOCX)</button>
+        </div>
       </div>
       <div class="hero-photo">
         <img class="profile-img" src="assets/profile.jpg" alt="Carlos Pérez profile photo">
@@ -218,6 +227,52 @@
   // Add a subtle scale bar for cartographic reference
   L.control.scale({ metric: true, imperial: false, position: 'bottomleft' }).addTo(map);
   
+  // NUEVA FUNCIONALIDAD: Descargar CV (archivo "Carlos Perez CV.docx" desde la carpeta assets/ o raíz)
+  // Se asume que el archivo está disponible en la ruta especificada.
+  // Para que funcione correctamente, el archivo "Carlos Perez CV.docx" debe estar en la carpeta 'assets'  
+  // o se puede ajustar la ruta. Se usará "./Carlos Perez CV.docx" por defecto.
+  const downloadBtn = document.getElementById('downloadCvBtn');
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      // Nombre del archivo según requerimiento: 'Carlos Perez CV.docx'
+      // Ruta: se puede cambiar si se necesita. Se coloca en el mismo directorio raíz del portfolio,
+      // pero también se intenta con 'assets/Carlos Perez CV.docx' como respaldo.
+      const fileName = 'Carlos Perez CV.docx';
+      // Intento de rutas: primero en el directorio actual, luego en assets.
+      // Se genera un enlace de descarga directa con fetch para mejor compatibilidad 
+      // y se fuerza la descarga con el nombre deseado.
+      fetch(fileName)
+        .then(response => {
+          if (!response.ok) {
+            // Si no se encuentra en raíz, probar en carpeta assets
+            return fetch(`assets/${fileName}`);
+          }
+          return response;
+        })
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`No se pudo encontrar el archivo: "${fileName}" o "assets/${fileName}". Asegúrate de que el archivo esté disponible.`);
+          }
+          return res.blob();
+        })
+        .then(blob => {
+          // Crear URL temporal y simular clic de descarga
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = fileName;   // Forzar nombre "Carlos Perez CV.docx"
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+          console.error('Error al descargar CV:', error);
+          alert(`No se pudo descargar el CV. Por favor asegúrate de que el archivo "${fileName}" esté ubicado en la carpeta raíz del portfolio o dentro de 'assets/'. Error: ${error.message}`);
+        });
+    });
+  }
+
   // Navigation buttons event listeners
   document.getElementById('contactBtn')?.addEventListener('click', () => { 
     const email = 'carlosdanielperez8@gmail.com'; 

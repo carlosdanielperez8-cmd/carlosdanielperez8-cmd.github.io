@@ -18,6 +18,8 @@
     .project-title { font-size: 1.8rem; font-weight: 700; color: #1c4e6c; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
     .project-badge { background: #1c6e5e20; color: #1c6e5e; padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 600; }
     .project-description { color: #2c4b5e; margin: 1rem 0 1.5rem 0; line-height: 1.6; }
+    .project-description ul { margin-top: 0.6rem; padding-left: 1.2rem; list-style: none; }
+    .project-description ul li { margin-bottom: 0.3rem; }
     .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-top: 1.5rem; }
     .media-item { background: #f9fdfe; border-radius: 1.2rem; padding: 1rem; border: 1px solid #e0edf2; transition: transform 0.2s; text-align: center; }
     .media-item:hover { transform: translateY(-4px); }
@@ -42,6 +44,9 @@
     .tools-container { margin-top: 0; }
     .map-wrapper { position: relative; padding-bottom: 65%; height: 0; overflow: hidden; border-radius: 1rem; background: #e9ecef; margin-top: 1rem; border: 1px solid #dce8ef; }
     .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 1rem; }
+    .info-box { background: #f0f7fa; padding: 0.8rem 1rem; border-radius: 0.8rem; margin-top: 0.6rem; font-size: 0.9rem; }
+    .info-box i { color: #1c6e5e; margin-right: 0.4rem; }
+    .info-box a { color: #1c6e5e; font-weight: 600; text-decoration: underline; }
     @media (max-width: 700px) {
       .container { padding: 1rem; }
       .project-title, .tool-title { font-size: 1.4rem; }
@@ -55,6 +60,56 @@
   <div class="page-header">
     <h1><i class="fas fa-cubes" style="color: #1c6e5e; margin-right: 0.5rem;"></i> Featured Projects</h1>
     <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+  </div>
+
+  <!-- SECTION: LiDAR 3D Interactive Model – River Park, Calgary -->
+  <div class="project-card">
+    <div class="project-title">
+      LiDAR 3D Interactive Model – River Park, Calgary
+      <span class="project-badge"><i class="fas fa-cube"></i> LiDAR | Machine Learning | 3D Visualization</span>
+    </div>
+    <div class="project-description">
+      <p>This project showcases the creation of an interactive 3D web application using LiDAR data from Natural Resources Canada to visualize a section of River Park in Calgary. The workflow included point cloud classification in ArcGIS Pro, the use of Machine Learning to identify power transmission towers and overhead power lines, and RGB colorization using a 2023 orthophoto of Calgary. The processed point cloud was then integrated into an ArcGIS Experience Builder application, allowing users to explore the area in both 2D and 3D, perform measurements, and filter the data interactively. Additionally, a 3D model of Heritage Hall at SAIT was developed to further demonstrate the capabilities of modern GIS technologies for creating engaging and accessible geospatial experiences.</p>
+      
+      <div class="info-box">
+        <i class="fas fa-link"></i> <strong>Experience Builder:</strong> 
+        <a href="https://experience.arcgis.com/experience/c8f3e395715b4c419bc10c5d7981c600" target="_blank">
+          https://experience.arcgis.com/experience/c8f3e395715b4c419bc10c5d7981c600
+        </a>
+      </div>
+    </div>
+
+    <!-- Embedded Experience Builder -->
+    <div class="map-wrapper">
+      <iframe 
+        src="https://experience.arcgis.com/experience/c8f3e395715b4c419bc10c5d7981c600" 
+        title="ArcGIS Experience Builder - LiDAR 3D Interactive Model - River Park, Calgary" 
+        frameborder="0" 
+        allow="fullscreen; geolocation; clipboard-write" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="media-caption" style="margin-top: 0.8rem; text-align: center;">
+      <i class="fas fa-cube"></i> Explore the 3D model of River Park, Calgary – Interactive 2D & 3D view
+    </div>
+
+    <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;">
+      <i class="fas fa-cogs"></i> Processing Workflow & Results
+    </h3>
+    <div class="media-grid">
+      <div class="media-item">
+        <img src="assets/CLAS.png" alt="LiDAR classification with Machine Learning in ArcGIS Pro" onclick="openLightbox(this.src)">
+        <div class="media-caption"><i class="fas fa-brain"></i> Automatic Classification (ML) in ArcGIS Pro</div>
+      </div>
+      <div class="media-item">
+        <img src="assets/HeritageHall.png" alt="3D model of Heritage Hall - SAIT" onclick="openLightbox(this.src)">
+        <div class="media-caption"><i class="fas fa-university"></i> 3D Model – Heritage Hall, SAIT</div>
+      </div>
+      <div class="media-item">
+        <img src="assets/RGB.png" alt="RGB colorization of the point cloud" onclick="openLightbox(this.src)">
+        <div class="media-caption"><i class="fas fa-palette"></i> RGB Colorization with Calgary Orthophoto</div>
+      </div>
+    </div>
   </div>
 
   <!-- SECTION 1: 3D Banff Model - GAEA - Blender -->
@@ -113,7 +168,7 @@
     </div>
   </div>
 
-  <!-- NEW SECTION: Calgary Tree Canopy Height (justo debajo de 3D Banff) -->
+  <!-- SECTION 2: Calgary Tree Canopy Height -->
   <div class="project-card">
     <div class="project-title">
       Calgary Tree Canopy Height
@@ -123,7 +178,7 @@
       <p>A 3D urban forest model of Calgary was created using the Global Sentinel-2 10m Canopy Height 2020 product from ETH Zürich. The project focuses on visualizing urban vegetation structure across the city.</p>
       <p>The workflow was developed in R and included raster processing, resolution optimization, and canopy height classification, with support from ArcGIS Pro for geospatial handling.</p>
       <p>Using packages such as terra, ggplot2, and rayshader, the data was transformed into a 3D visualization with custom styling and realistic shading.</p>
-      <p>The final output is a 3D geospatial representation of Calgary’s urban canopy, combining GIS analysis and 3D modeling techniques in R.</p>
+      <p>The final output is a 3D geospatial representation of Calgary's urban canopy, combining GIS analysis and 3D modeling techniques in R.</p>
     </div>
 
     <h3 style="font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;">
@@ -149,7 +204,7 @@
     </div>
   </div>
 
-  <!-- SECTION 2: Unreal Engine 5 + Cesium – Interactive 3D Models (ENHANCED with Calgary) -->
+  <!-- SECTION 3: Unreal Engine 5 + Cesium – Interactive 3D Models -->
   <div class="project-card">
     <div class="project-title">
       Unreal Engine 5 + Cesium – Interactive 3D Models
@@ -193,7 +248,6 @@
       </div>
     </div>
 
-    <!-- Calgary Real-Time GIS Integration (kept as original) -->
     <h3 style="font-size: 1.2rem; margin: 2rem 0 0.5rem 0; color: #1c4e6c;">
       <i class="fas fa-city"></i> Calgary – Real-Time GIS Integration with Unreal Engine 5
     </h3>
@@ -217,12 +271,11 @@
     </div>
   </div>
 
-  <!-- SECTION 3: GIS Standalone Tools -->
+  <!-- SECTION 4: GIS Standalone Tools -->
   <div class="tools-container">
     <h2 class="tool-section-title"><i class="fas fa-tools" style="color: #1c6e5e; margin-right: 0.6rem;"></i> GIS Standalone Tools</h2>
     <p style="color: #2c4b5e; margin-bottom: 1.5rem;">Custom-built executable tools integrating satellite imagery, cloud AI, and change detection for non-GIS specialists and analysts.</p>
 
-    <!-- Tool 1: Sentinel & Landsat Imagery Downloader Tool -->
     <div class="tool-card">
       <div class="tool-title">
         Sentinel & Landsat Imagery Downloader Tool
@@ -248,7 +301,6 @@
       </div>
     </div>
 
-    <!-- Tool 2: Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance -->
     <div class="tool-card">
       <div class="tool-title">
         Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance
@@ -276,7 +328,7 @@
     </div>
   </div>
 
-  <!-- SECTION 4: California - Spatial Distribution of White People in California -->
+  <!-- SECTION 5: California - Spatial Distribution of White People -->
   <div class="project-card">
     <div class="project-title">
       Spatial Distribution of White People in California
@@ -296,7 +348,7 @@
     </div>
   </div>
 
-  <!-- SECTION 5: Distribution of Aviation Accidents in California -->
+  <!-- SECTION 6: Distribution of Aviation Accidents in California -->
   <div class="project-card">
     <div class="project-title">
       Distribution of Aviation Accidents in California
@@ -306,7 +358,6 @@
       <p>One of the states with the highest number of aviation accidents involving aircraft is the state of California, with approximately more than 600 accidents recorded between 2000 and 2025. The distribution and frequency of aviation accidents occurring in this state are closely linked to the numerous airports and private flights operating daily in California, as well as to the complex geography of the region. The following map illustrates some of these incidents. ✈️🗺️</p>
     </div>
 
-    <!-- Interactive ArcGIS Map Embed - Versión pública que SÍ funciona -->
     <div class="map-wrapper">
       <iframe 
         src="https://experience.arcgis.com/experience/3c455d4b89ea429caec86ca124256234" 
@@ -321,7 +372,7 @@
     </div>
   </div>
 
-  <!-- SECTION 6: Groundwater Vulnerability Assessment -->
+  <!-- SECTION 7: Groundwater Vulnerability Assessment -->
   <div class="project-card">
     <div class="project-title">
       Groundwater Vulnerability Assessment

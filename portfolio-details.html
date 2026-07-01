@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Portfolio Details - Carlos Pérez | GIS Projects</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .project-detail-section {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #e2edf2;
+    }
+    .project-detail-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .project-detail-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1c4e6c;
+      margin-bottom: 0.5rem;
+    }
+    .project-detail-badge {
+      background: #1c6e5e20;
+      color: #1c6e5e;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+    .project-detail-desc {
+      color: #2c4b5e;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .project-detail-desc ul {
+      padding-left: 1.2rem;
+      list-style: none;
+    }
+    .project-detail-desc ul li {
+      margin-bottom: 0.3rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .project-detail-desc ul li::before {
+      content: "▹";
+      color: #1c6e5e;
+      position: absolute;
+      left: 0;
+    }
+    .project-media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+    }
+    .project-media-item {
+      background: #f9fdfe;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      border: 1px solid #e0edf2;
+      transition: transform 0.2s;
+      text-align: center;
+    }
+    .project-media-item:hover {
+      transform: translateY(-4px);
+    }
+    .project-media-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.8rem;
+      border: 1px solid #dce8ef;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .project-media-item img:active {
+      transform: scale(0.98);
+    }
+    .project-media-item video {
+      width: 100%;
+      border-radius: 0.8rem;
+      border: 1px solid #dce8ef;
+      background: #000;
+    }
+    .project-media-caption {
+      font-size: 0.8rem;
+      color: #5a7b8c;
+      margin-top: 0.5rem;
+    }
+    .project-media-caption i {
+      margin-right: 0.3rem;
+      color: #1c6e5e;
+    }
+    .info-box {
+      background: #f0f7fa;
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+    .info-box i {
+      color: #1c6e5e;
+      margin-right: 0.4rem;
+    }
+    .info-box a {
+      color: #1c6e5e;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .map-wrapper {
+      position: relative;
+      padding-bottom: 65%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #e9ecef;
+      margin-top: 1rem;
+      border: 1px solid #dce8ef;
+    }
+    .map-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 1rem;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #000;
+      margin-top: 1rem;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 1rem;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 0.5rem;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    @media (max-width: 700px) {
+      .project-media-grid {
+        grid-template-columns: 1fr;
+      }
+      .map-wrapper {
+        padding-bottom: 75%;
+      }
+    }
+  </style>
+
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header dark-background d-flex flex-column">
+    <i class="header-toggle d-xl-none bi bi-list"></i>
+
+    <div class="profile-img">
+      <img src="assets/img/my-profile-img.jpg" alt="Carlos Pérez" class="img-fluid">
+    </div>
+
+    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+      <h1 class="sitename">Carlos Pérez</h1>
+    </a>
+
+    <div class="social-links text-center">
+      <a href="https://www.linkedin.com/in/carlos-daniel-perez-garcia-34ba1b2b5/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:carlosdanielperez8@gmail.com" class="envelope"><i class="bi bi-envelope"></i></a>
+    </div>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="index.html"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="index.html#about"><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="index.html#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="index.html#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
+        <li><a href="index.html#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Portfolio Details</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Portfolio Details</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 1: LiDAR 3D Interactive Model – River Park, Calgary -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="lidar">
+          <h2 class="project-detail-title">
+            <i class="fas fa-cube" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            LiDAR 3D Interactive Model – River Park, Calgary
+          </h2>
+          <div class="project-detail-badge"><i class="fas fa-cube"></i> LiDAR | Machine Learning | 3D Visualization</div>
+          
+          <div class="project-detail-desc">
+            <p>This project showcases the creation of an interactive 3D web application using LiDAR data from Natural Resources Canada to visualize a section of River Park in Calgary. The workflow included point cloud classification in ArcGIS Pro, the use of Machine Learning to identify power transmission towers and overhead power lines, and RGB colorization using a 2023 orthophoto of Calgary. The processed point cloud was then integrated into an ArcGIS Experience Builder application, allowing users to explore the area in both 2D and 3D, perform measurements, and filter the data interactively. Additionally, a 3D model of Heritage Hall at SAIT was developed to further demonstrate the capabilities of modern GIS technologies for creating engaging and accessible geospatial experiences.</p>
+            
+<div class="info-box">
+  <i class="fas fa-link"></i> <strong>Experience Builder:</strong> 
+  <a href="https://experience.arcgis.com/experience/c8f3e395715b4c419bc10c5d7981c600" target="_blank">
+    https://experience.arcgis.com/experience/c8f3e395715b4c419bc10c5d7981c600
+  </a>
+</div>
+
+<div class="info-box">
+  <i class="fas fa-cube"></i> <strong>River Park 3D Model:</strong> 
+  <a href="https://carlosdanielperez8-cmd.github.io/LIDARCDPG/" target="_blank">
+    https://carlosdanielperez8-cmd.github.io/LIDARCDPG/
+  </a>
+</div>
+
+<div class="info-box">
+  <i class="fas fa-building"></i> <strong>Heritage Hall 3D Model:</strong> 
+  <a href="https://carlosdanielperez8-cmd.github.io/SAIT/" target="_blank">
+    https://carlosdanielperez8-cmd.github.io/SAIT/
+  </a>
+</div>
+          </div>
+
+          <!-- Embedded Experience Builder -->
+          <div class="map-wrapper">
+            <iframe 
+              src="https://experience.arcgis.com/experience/c8f3e395715b4c419bc10c5d7981c600" 
+              title="ArcGIS Experience Builder - LiDAR 3D Interactive Model - River Park, Calgary" 
+              frameborder="0" 
+              allow="fullscreen; geolocation; clipboard-write" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="project-media-caption" style="text-align: center; margin-top: 0.5rem;">
+            <i class="fas fa-cube"></i> Explore the 3D model of River Park, Calgary – Interactive 2D & 3D view
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-cogs"></i> Processing Workflow & Results
+          </h4>
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <img src="assets/CLAS.png" alt="LiDAR classification with Machine Learning in ArcGIS Pro" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-brain"></i> Automatic Classification (ML) in ArcGIS Pro</div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/Heritage.png" alt="3D model of Heritage Hall - SAIT" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-university"></i> 3D Model – Heritage Hall, SAIT</div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/Colored.png" alt="RGB colorization of the point cloud" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-palette"></i> RGB Colorization with Calgary Orthophoto</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 2: 3D Banff Model - GAEA - Blender -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="banff">
+          <h2 class="project-detail-title">
+            <i class="fas fa-mountain" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            3D Banff Model - GAEA - Blender
+          </h2>
+          <div class="project-detail-badge"><i class="fas fa-mountain"></i> Terrain Simulation & 3D Rendering</div>
+          
+          <div class="project-detail-desc">
+            <p>A 3D terrain model was created using a digital elevation model (DEM) as the primary data source. The study area chosen was <strong>Banff</strong>, notable for its stunning geography, complex hydrology, and scenic value.</p>
+            <p style="margin-top: 0.6rem;">The DEM was processed in <strong>ArcGisPro</strong> and further developed in <strong>Gaea</strong>, where node-based workflows and simulation techniques were used to generate a realistic representation of the terrain and water bodies. The outputs from Gaea were then imported into <strong>Blender</strong> to create a 3D rendering of Banff, complete with dynamic lighting, clouds, and flowing water.</p>
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-chart-line"></i> GAEA Outputs
+          </h4>
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <img src="assets/banff-terrain.png" alt="Banff 3D Terrain Model - GAEA Visualization" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-image"></i> Terrain Visualization - GAEA Output</div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/banff-hydrology.png" alt="Banff Hydrological Features - Water Bodies Simulation" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-water"></i> Hydrological Features & Water Bodies</div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/banff-flyover.png" alt="Banff 3D Flyover - Aerial Perspective" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-map"></i> 3D Flyover - Banff Terrain Model</div>
+            </div>
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-cube"></i> Blender Renderings
+          </h4>
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <div class="video-wrapper">
+                <iframe 
+                  src="https://www.youtube.com/embed/IrPkpBH2MxA" 
+                  title="Blender Animation - Banff Flythrough" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="project-media-caption">
+                <i class="fab fa-youtube"></i> Blender Animation - Banff Flythrough
+              </div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/Blend_Banff2.png" alt="Blender 3D Rendering - Banff with Dynamic Lighting" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-sun"></i> Blender Rendering - Dynamic Lighting & Clouds
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 3: Calgary Tree Canopy Height -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="canopy">
+          <h2 class="project-detail-title">
+            <i class="fas fa-tree" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            Calgary Tree Canopy Height
+          </h2>
+          <div class="project-detail-badge"><i class="fas fa-tree"></i> Urban Forest | 3D Canopy Modeling | R + rayshader</div>
+          
+          <div class="project-detail-desc">
+            <p>A 3D urban forest model of Calgary was created using the Global Sentinel-2 10m Canopy Height 2020 product from ETH Zürich. The project focuses on visualizing urban vegetation structure across the city.</p>
+            <p>The workflow was developed in R and included raster processing, resolution optimization, and canopy height classification, with support from ArcGIS Pro for geospatial handling.</p>
+            <p>Using packages such as terra, ggplot2, and rayshader, the data was transformed into a 3D visualization with custom styling and realistic shading.</p>
+            <p>The final output is a 3D geospatial representation of Calgary's urban canopy, combining GIS analysis and 3D modeling techniques in R.</p>
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-city"></i> Canopy Height 3D Visualizations
+          </h4>
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <img src="assets/CalCanopy.png" alt="Calgary 3D urban canopy height model - overview" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-chart-line"></i> Calgary Canopy Height Map</div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/CalCanopy2.png" alt="Calgary canopy height classification and shading" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-palette"></i> Rendering and preview process</div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/CalCanopy3.png" alt="Detailed urban forest structure across Calgary" onclick="openLightbox(this.src)">
+              <div class="project-media-caption"><i class="fas fa-leaf"></i> Image Processing in ArcGIS Pro</div>
+            </div>
+          </div>
+          
+          <div class="info-box" style="margin-top: 1rem;">
+            <i class="fas fa-microchip"></i> <strong>Technical workflow:</strong> ETH Zürich Global Canopy Height 2020 (10m) → R (terra/ggplot2) → resolution optimization & height classification → ArcGIS Pro geospatial refinement → rayshader 3D rendering with custom lighting and shading.
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 4: Unreal Engine 5 + Cesium -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="unreal">
+          <h2 class="project-detail-title">
+            <i class="fab fa-unreal" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            Unreal Engine 5 + Cesium – Interactive 3D Models
+          </h2>
+          <div class="project-detail-badge"><i class="fab fa-unreal"></i> 3D GIS | Google Earth Engine - Cesium</div>
+          
+          <div class="project-detail-desc">
+            <p>Through the use of the Unreal Engine graphics engine and with the support of the Cesium plugin, this engine can be transformed into a GIS tool by leveraging high-resolution imagery repositories from Google Earth Engine for the interactive design of maps. In this case, two major cathedrals are represented: the first is St. Peter's Basilica, and the second is Ulm Minster.</p>
+          </div>
+
+          <div class="video-wrapper">
+            <iframe 
+              src="https://www.youtube.com/embed/lJwZRHSY8VA" 
+              title="Unreal Engine 5 + Cesium GIS Integration - Cathedral Maps" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="project-media-caption" style="text-align: center; margin-top: 0.5rem;">
+            <i class="fab fa-youtube"></i> Unreal Engine 5 + Cesium
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-landmark"></i> Cathedral Visualization and Rendering Process
+          </h4>
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <img src="assets/U5_ULM.png" alt="Ulm Minster - Unreal Engine 5 + Cesium Visualization" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-church"></i> Ulm Minster – Germany
+              </div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/U5_VAT.png" alt="St. Peter's Basilica - Unreal Engine 5 + Cesium Visualization" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-church"></i> St. Peter's Basilica – Vatican City
+              </div>
+            </div>
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-city"></i> Calgary – Real-Time GIS Integration with Unreal Engine 5
+          </h4>
+          <div class="project-detail-desc">
+            <p>Another demonstration of how Unreal Engine 5 is integrated with real GIS data to create architectural visualizations and detailed 3D environments, this time for the City of Calgary, combining spatial modeling, geolocation, and real-time rendering.</p>
+          </div>
+          <div class="video-wrapper">
+            <iframe 
+              src="https://www.youtube.com/embed/uVr7z9OkKUA" 
+              title="Unreal Engine 5 + Cesium - Calgary 3D Environment & Architectural Visualization" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="project-media-caption" style="text-align: center; margin-top: 0.5rem;">
+            <i class="fab fa-youtube"></i> Calgary 3D GIS Integration – Unreal Engine 5 + Cesium
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 5: GIS Standalone Tools -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="tools">
+          <h2 class="project-detail-title">
+            <i class="fas fa-tools" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            GIS Standalone Tools
+          </h2>
+          
+          <div style="margin-bottom: 2rem;">
+            <h4 style="font-size: 1.1rem; margin: 1rem 0 0.5rem 0; color: #1c4e6c;">
+              <i class="fas fa-cloud-download-alt"></i> Sentinel & Landsat Imagery Downloader Tool
+            </h4>
+            <div class="project-detail-badge"><i class="fas fa-cloud-download-alt"></i> .exe | Earth Engine API</div>
+            <div class="project-detail-desc">
+              <p>This is a standalone tool that enables the processing and automated download of satellite imagery directly from Landsat and Sentinel satellites to obtain NDVI calculated automatically. This is achieved through integration with Google Earth Engine, which allows access to the different image repositories available on the platform. The tool is useful for the rapid visualization of sites of interest and for providing a general understanding of what may be occurring in a given area. Additionally, it generates statistical files related to NDVI. The tool was packaged into a .exe file so that non-GIS users and those without Python installed can use it easily.</p>
+            </div>
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/wruOd4VnoNE" 
+                title="Sentinel & Landsat Imagery Downloader Tool Demo" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="project-media-caption" style="text-align: center; margin-top: 0.5rem;">
+              <i class="fab fa-youtube"></i> Sentinel & Landsat Downloader + NDVI Automation – Demonstration
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem 0; color: #1c4e6c;">
+              <i class="fas fa-robot"></i> Remote Sensing Vegetation Change Detection and Analysis Tool with AI Assistance
+            </h4>
+            <div class="project-detail-badge"><i class="fas fa-robot"></i> AI Cloud Removal | HTML Maps | TIF Export</div>
+            <div class="project-detail-desc">
+              <p>This second standalone tool allows the end user to process images from the Sentinel satellite through integration with Google Earth Engine, providing access to the available image repositories. As a result, it generates an interactive HTML map that displays vegetation changes over different periods of time. Additionally, it downloads TIF files so they can be used and analyzed in ArcGIS Pro.</p>
+              <p style="margin-top: 0.6rem;">This tool employs artificial intelligence in two ways: first, to remove clouds from Sentinel-2 images, and second, as a results interpreter that facilitates the reading and understanding of the data for users who are not familiar with GIS.</p>
+            </div>
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/RINQtlN4xPc" 
+                title="Vegetation Change Detection & AI Assistant Tool Demo" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="project-media-caption" style="text-align: center; margin-top: 0.5rem;">
+              <i class="fab fa-youtube"></i> Change Detection + AI Cloud Removal & Smart Interpretation
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 6: Spatial Distribution of White People in California -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="demographic">
+          <h2 class="project-detail-title">
+            <i class="fas fa-chart-pie" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            Spatial Distribution of White People in California
+          </h2>
+          <div class="project-detail-badge"><i class="fas fa-chart-pie"></i> Demographic Patterns | Cartographic Visualization</div>
+          
+          <div class="project-detail-desc">
+            <p>This map aims to illustrate the spatial patterns in the distribution of the White population in the state of California, United States. It shows a clear pattern in which populations are more concentrated toward the northern region of the state, while this percentage decreases noticeably toward the south. These types of maps make it possible to visualize demographic patterns in a simple and highly understandable way.</p>
+          </div>
+
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <img src="assets/California.jpg" alt="Spatial Distribution of White Population in California" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-users"></i> Percentage of White Population by County – California
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PROYECTO 7: Distribution of Aviation Accidents in California -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="aviation">
+          <h2 class="project-detail-title">
+            <i class="fas fa-plane-crash" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            Distribution of Aviation Accidents in California
+          </h2>
+          <div class="project-detail-badge"><i class="fas fa-plane-crash"></i> Aviation Safety | Spatial Analysis | ArcGIS Dashboard</div>
+          
+          <div class="project-detail-desc">
+            <p>One of the states with the highest number of aviation accidents involving aircraft is the state of California, with approximately more than 600 accidents recorded between 2000 and 2025. The distribution and frequency of aviation accidents occurring in this state are closely linked to the numerous airports and private flights operating daily in California, as well as to the complex geography of the region. The following map illustrates some of these incidents. ✈️🗺️</p>
+          </div>
+
+          <div class="map-wrapper">
+            <iframe 
+              src="https://experience.arcgis.com/experience/3c455d4b89ea429caec86ca124256234" 
+              title="ArcGIS Experience - Aviation Accidents in California" 
+              frameborder="0" 
+              allow="fullscreen; geolocation; clipboard-write" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="project-media-caption" style="text-align: center; margin-top: 0.5rem;">
+            <i class="fas fa-map-marked-alt"></i> Interactive map – Aviation accident incidents in California (2000–2025)
+          </div>
+        </div>
+		  
+<!-- ============================================================ -->
+<!-- PROYECTO 10: 3D Terrain Visualization with LiDAR and OpenStreetMap -->
+<!-- ============================================================ -->
+<div class="project-detail-section" id="terrain">
+  <h2 class="project-detail-title">
+    <i class="fas fa-mountain" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+    3D Terrain Visualization with LiDAR and OpenStreetMap
+  </h2>
+  <div class="project-detail-badge"><i class="fas fa-map"></i> LiDAR | 3D Cartography | R + rayshader</div>
+  
+  <div class="project-detail-desc">
+    <p>This project presents a high-quality 3D terrain visualization created by integrating LiDAR-derived Digital Elevation Models (DEM) with OpenStreetMap vector data. Using ArcGIS Pro and R, the workflow processed elevation data and incorporated roads, rivers, buildings, and place names to produce an accurate representation of the Swiss landscape.</p>
+    <p style="margin-top: 0.6rem;">The final visualization was rendered with the rayshader package and enhanced using HDRI lighting to achieve a realistic three-dimensional appearance. This project demonstrates expertise in LiDAR processing, terrain analysis, geospatial data integration, 3D cartographic visualization, and the use of open geospatial datasets to create compelling mapping products.</p>
+  </div>
+
+  <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+  </h4>
+  <div class="project-media-grid">
+    <div class="project-media-item">
+      <img src="assets/Finaltopo.png" alt="3D Terrain Visualization with LiDAR and OpenStreetMap" onclick="openLightbox(this.src)">
+      <div class="project-media-caption">
+        <i class="fas fa-image"></i> High-quality 3D terrain render – Swiss landscape
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- ============================================================ -->
+        <!-- PROYECTO 8: Groundwater Vulnerability Assessment -->
+        <!-- ============================================================ -->
+        <div class="project-detail-section" id="groundwater">
+          <h2 class="project-detail-title">
+            <i class="fas fa-tint" style="color: #1c6e5e; margin-right: 0.5rem;"></i>
+            Groundwater Vulnerability Assessment
+          </h2>
+          <div class="project-detail-badge"><i class="fas fa-tint"></i> Hydrogeology | Real-Time Monitoring | Alberta, Canada</div>
+          
+          <div class="project-detail-desc">
+            <p>Maps used for the Groundwater Vulnerability Assessment, in which various natural variables and land classification were considered to determine the vulnerability of several water wells equipped with real-time water quality monitoring systems. These wells are located throughout the province of Alberta, Canada.</p>
+            <p style="margin-top: 0.6rem;">The assessment integrates hydrogeological data, land use classification, and intrinsic aquifer susceptibility to produce a comprehensive vulnerability index. This helps in protecting critical groundwater resources and supports decision-making for sustainable water management.</p>
+          </div>
+
+          <h4 style="font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; color: #1c4e6c;">
+            <i class="fas fa-map"></i> Vulnerability Assessment Maps
+          </h4>
+          <div class="project-media-grid">
+            <div class="project-media-item">
+              <img src="assets/AB.jpg" alt="Groundwater Vulnerability Map - Alberta Overview" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-draw-polygon"></i> Alberta Groundwater Vulnerability - Regional Index
+              </div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/AB2.jpg" alt="Detailed Vulnerability Zones and Well Monitoring Sites" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-chart-line"></i> Vulnerability Zones & Real-Time Well Monitoring Sites
+              </div>
+            </div>
+            <div class="project-media-item">
+              <img src="assets/AB3.jpg" alt="Integrated Natural Variables and Land Classification" onclick="openLightbox(this.src)">
+              <div class="project-media-caption">
+                <i class="fas fa-layer-group"></i> Integrated Variables: Land Use, Aquifer Susceptibility & Hydrogeology
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Carlos Pérez</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="credits">
+        GIS & Environmental Engineering Portfolio
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Full size view">
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.classList.add('active');
+    }
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.getElementById('lightbox-img').src = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+<script>
+  // Script para scroll automático al proyecto específico desde el índice
+  document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si hay un hash en la URL
+    if (window.location.hash) {
+      // Esperar un momento para que la página cargue completamente
+      setTimeout(function() {
+        const targetId = window.location.hash.substring(1); // Remover el # inicial
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          // Calcular la posición del elemento considerando el header fijo
+          const headerHeight = document.querySelector('#header')?.offsetHeight || 80;
+          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerHeight - 20; // 20px de margen extra
+          
+          // Scroll suave hasta la posición
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Opcional: Resaltar el proyecto brevemente
+          targetElement.style.transition = 'background-color 0.5s ease';
+          targetElement.style.backgroundColor = '#e8f4f8';
+          setTimeout(() => {
+            targetElement.style.backgroundColor = 'transparent';
+          }, 2000);
+        }
+      }, 500); // Esperar 500ms para asegurar que todo esté cargado
+    }
+  });
+
+  // También manejar el caso cuando el usuario navega con el historial (back/forward)
+  window.addEventListener('hashchange', function() {
+    const targetId = window.location.hash.substring(1);
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      const headerHeight = document.querySelector('#header')?.offsetHeight || 80;
+      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - 20;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  });
+</script>
+</body>
+
+</html>

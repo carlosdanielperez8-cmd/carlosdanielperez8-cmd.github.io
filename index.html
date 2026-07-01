@@ -1,288 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Carlos Pérez | GIS & Environmental Engineering Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <meta content="GIS, Environmental Engineering, Spatial Data Analyst, Portfolio" name="description">
+  <meta content="Carlos Pérez, GIS, Environmental Engineer, Spatial Data, ArcGIS, Python" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- ============================================================
+  ESTILOS PARA THUMBNAILS DEL MISMO TAMAÑO
+  ============================================================ -->
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #f4f7fc; color: #1a2c3e; line-height: 1.5; scroll-behavior: smooth; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .hero { background: linear-gradient(135deg, #0b2b3b 0%, #1c4e6c 100%); color: white; border-radius: 2rem; padding: 2.5rem 2rem; margin-bottom: 2.5rem; box-shadow: 0 15px 30px -12px rgba(0,0,0,0.2); }
-    .hero-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
-    .hero-info { flex: 1; }
-    .hero-info h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-    .hero-details { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0; font-size: 0.95rem; }
-    .hero-details i { margin-right: 0.5rem; width: 1.2rem; }
-    .btn-contact { background: #ffb347; color: #1a2c3e; border: none; padding: 0.7rem 1.5rem; border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; transition: 0.2s; }
-    .btn-contact:hover { background: #ff9f1a; transform: scale(1.02); }
-    /* Estilo específico para el botón de descarga de CV, manteniendo coherencia visual */
-    .btn-download-cv { background: #2c7a5e; color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; transition: 0.2s; margin-left: 0.8rem; }
-    .btn-download-cv:hover { background: #1e5a45; transform: scale(1.02); }
-    .hero-photo { flex-shrink: 0; }
-    .profile-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: transform 0.3s ease, border-color 0.3s ease; }
-    .profile-img:hover { transform: scale(1.02); border-color: #ffb347; }
-    .section-title { font-size: 1.8rem; font-weight: 700; margin: 2rem 0 1rem 0; border-left: 6px solid #1c6e5e; padding-left: 1rem; color: #0f3b4c; }
-    .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
-    .card { background: white; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s; border: 1px solid #e2edf2; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1); }
-    .card-icon { font-size: 2rem; color: #1c6e5e; margin-bottom: 1rem; }
-    .card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: #1c4e6c; }
-    .skill-badge { display: inline-block; background: #e9f0f5; padding: 0.3rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem 0.2rem; color: #1c5a7a; }
-    .exp-item { margin-bottom: 1.2rem; }
-    .exp-title { font-weight: 800; font-size: 1rem; color: #0f3b4c; }
-    .exp-meta { font-size: 0.75rem; color: #5a7b8c; margin-bottom: 0.4rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
-    .exp-desc { font-size: 0.85rem; color: #2c4b5e; list-style-type: disc; padding-left: 1.2rem; }
-    .exp-desc li { margin-bottom: 0.3rem; }
-    hr { margin: 1rem 0; border-color: #e2edf2; }
-    .lang-soft { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; }
-    .university-logos { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; margin-top: 1rem; margin-bottom: 1rem; background: linear-gradient(135deg, #f9fdfe 0%, #f0f6fa 100%); padding: 1.2rem 1.5rem; border-radius: 1.2rem; border: 1px solid #e0edf2; }
-    .uni-logo-item { display: flex; align-items: center; gap: 1rem; background: white; padding: 0.6rem 1.2rem 0.6rem 0.8rem; border-radius: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; flex: 0 1 auto; }
-    .uni-logo-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .uni-logo-img { width: 52px; height: 52px; object-fit: contain; border-radius: 12px; background: #fff; padding: 4px; }
-    .uni-logo-text { font-weight: 700; font-size: 0.9rem; color: #1a4e6e; }
-    .uni-logo-text small { font-weight: 400; font-size: 0.7rem; color: #5e7e92; display: block; margin-top: 2px; }
-    .footer { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #cbdde6; color: #4f6f7f; font-size: 0.8rem; }
-    .nav-buttons { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .nav-btn { background: white; border: none; padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.05); color: #1c4e6c; display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Inter', sans-serif; }
-    .nav-btn i { font-size: 1.1rem; color: #1c6e5e; }
-    .nav-btn:hover { background: #1c6e5e; color: white; transform: translateY(-3px); box-shadow: 0 10px 18px rgba(0,0,0,0.1); }
-    .nav-btn:hover i { color: white; }
-    .nav-btn.projects-btn { background: #1c6e5e; color: white; }
-    .nav-btn.projects-btn i { color: white; }
-    .nav-btn.projects-btn:hover { background: #0f4f43; transform: translateY(-3px); }
-    .map-card { margin-bottom: 1.5rem; }
-    .origin-map { height: 380px; width: 100%; border-radius: 1rem; overflow: hidden; margin-top: 1rem; border: 1px solid #dce8ef; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-    .map-caption { font-size: 0.85rem; color: #2c5a6e; text-align: center; margin-top: 0.6rem; background: #eef3f7; display: inline-block; padding: 0.3rem 1rem; border-radius: 40px; width: auto; margin-left: auto; margin-right: auto; }
-    @media (max-width: 700px) {
-      .hero-info h1 { font-size: 2rem; }
-      .container { padding: 1rem; }
-      .hero { padding: 1.5rem; }
-      .uni-logo-img { width: 42px; height: 42px; }
-      .uni-logo-item { gap: 0.6rem; padding: 0.4rem 1rem 0.4rem 0.6rem; }
-      .uni-logo-text { font-size: 0.75rem; }
-      .nav-btn { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
-      .profile-img { width: 140px; height: 140px; }
-      .origin-map { height: 280px; }
-      .btn-download-cv { margin-left: 0; margin-top: 0.5rem; }
-      .hero-details { flex-direction: column; gap: 0.5rem; }
+    /* ============================================
+       THUMBNAILS DEL PORTFOLIO - MISMO TAMAÑO
+       ============================================ */
+
+    .portfolio-content {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #f0f4f8;
+      min-height: 280px;
+    }
+
+    .portfolio-content .img-fluid {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .portfolio-content:hover .img-fluid {
+      transform: scale(1.05);
+    }
+
+    /* Estilo para la información superpuesta */
+    .portfolio-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+      color: white;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .portfolio-content:hover .portfolio-info {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portfolio-info h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: white;
+    }
+
+    .portfolio-info p {
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .portfolio-info .details-link {
+      color: white;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .portfolio-info .details-link:hover {
+      color: #ffb347;
+    }
+
+    /* Para pantallas pequeñas */
+    @media (max-width: 768px) {
+      .portfolio-content .img-fluid {
+        height: 200px;
+      }
+      .portfolio-content {
+        min-height: 220px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .portfolio-content .img-fluid {
+        height: 180px;
+      }
+      .portfolio-content {
+        min-height: 200px;
+      }
+    }
+
+    /* Estilo para el mapa de Colombia - mismo tamaño que el de contacto */
+    .origin-map iframe {
+      width: 100%;
+      height: 270px;
+      border: 0;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .map-caption {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      color: #149ddd;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Ajustes para la sección About */
+    .about .content h3 {
+      margin-top: 1rem;
     }
   </style>
+
 </head>
-<body>
-<div class="container">
-  <div class="nav-buttons">
-    <button class="nav-btn" id="navSkillsBtn"><i class="fas fa-chart-line"></i> Skills</button>
-    <button class="nav-btn" id="navExperienceBtn"><i class="fas fa-briefcase"></i> Experience</button>
-    <button class="nav-btn" id="navEducationBtn"><i class="fas fa-graduation-cap"></i> Education</button>
-    <button class="nav-btn" id="navContactBtn"><i class="fas fa-envelope"></i> Contact</button>
-    <button class="nav-btn projects-btn" id="navProjectsBtn"><i class="fas fa-cubes"></i> Projects</button>
-  </div>
 
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-info">
-        <h1>Carlos Pérez</h1>
-        <p style="font-size: 1.1rem; max-width: 550px;">GIS & Environmental Engineer | Effective Solutions for Emerging Environments</p>
-        <div class="hero-details">
-          <span><i class="fas fa-map-marker-alt"></i> Calgary, AB</span>
-          <span><i class="fas fa-phone-alt"></i> 587-438-7249</span>
-          <span><i class="fas fa-envelope"></i> carlosdanielperez8@gmail.com</span>
+<body class="index-page">
+
+  <header id="header" class="header dark-background d-flex flex-column">
+    <i class="header-toggle d-xl-none bi bi-list"></i>
+
+    <div class="profile-img">
+      <img src="assets/img/my-profile-img.jpg" alt="Carlos Pérez profile photo" class="img-fluid">
+    </div>
+
+    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+      <h1 class="sitename">Carlos Pérez</h1>
+    </a>
+
+    <div class="social-links text-center">
+      <a href="https://www.linkedin.com/in/carlos-daniel-perez-garcia-34ba1b2b5/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:carlosdanielperez8@gmail.com" class="envelope"><i class="bi bi-envelope"></i></a>
+    </div>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
+        <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in" class="">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <h2>Carlos Pérez</h2>
+        <p>I'm <span class="typed" data-typed-items="Spatial Data Analyst, Environmental Engineer, GIS Developer, Cartographer">Cartographer</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About</h2>
+        <p>I am a GIS Analyst with a background in Environmental Engineering, focused on geospatial data quality, spatial data processing, analysis workflows, and data management. With over three years of experience in environmental analysis, I have worked with sensitive datasets, prepared regulatory technical reports, and contributed to multiple research projects. I am a results-oriented professional with proven expertise in geospatial analysis, providing technical support for environmental and infrastructure projects through GIS-based solutions. My technical skills include the full ArcGIS ecosystem, Microsoft SQL Server, Python, and FME for GIS data processing, automation, and conversion, as well as experience with spatial databases, web-based GIS platforms, and advanced office productivity tools.</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="assets/img/my-profile-img.jpg" alt="Carlos Pérez" class="img-fluid">
+          </div>
+          <div class="col-lg-8 content">
+            <h2>GIS &amp; Environmental Engineer</h2>
+            <p class="fst-italic py-3">
+              “Spatial knowledge gives humans the ability to understand the what, when, and where. GIS is not just about making maps; it is the compass that shows us where we are and where we are heading.” – Carlos Perez
+            </p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>587-438-7249</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Calgary, AB</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Degrees:</strong> <span>Environmental Engineering -&nbsp;Geographic Information System</span></li>
+				  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>carlosdanielperez8@gmail.com</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <strong>My Roots:</strong>&nbsp;
+                </ul>
+                <ul>
+                  <span>I was born and raised in Bucaramanga, a small city in Colombia known for its incredible biodiversity, rich ecosystems, and diverse landscapes. Growing up in this environment sparked my passion for environmental engineering and geospatial sciences, shaping the way I understand and perceive the world around me.</span>
+                </ul>
+              </div>
+            </div>
+              
+            <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
+                       <!-- MAPA DE COLOMBIA - MISMO TAMAÑO QUE EL DE CONTACTO -->
+            <div class="origin-map">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126571.24094622393!2d-73.18456586930206!3d7.114645261269761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6816a0d7b6cf4f%3A0x4d4a7c1a3b6f8e2d!2sBucaramanga%2C%20Santander%2C%20Colombia!5e0!3m2!1sen!2sca!4v1743428000000!5m2!1sen!2sca" 
+                style="border:0; width:100%; height:200px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+             <div class="map-caption"><i class="bi bi-geo-alt"></i> Bucaramanga, my hometown</div>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
-          <button class="btn-contact" id="contactBtn"><i class="fas fa-paper-plane"></i> Contact me by email</button>
-          <!-- Botón para descargar el CV agregado aquí -->
-          <button class="btn-download-cv" id="downloadCvBtn"><i class="fas fa-download"></i> Download CV (DOCX)</button>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-journal-richtext"></i>
+              <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Years Experience</strong> <span>in Environmental Engineering</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-map"></i>
+              <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Projects</strong> <span>GIS & Environmental</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-tools"></i>
+              <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Tools Mastered</strong> <span>ArcGIS, Python, FME, SQL</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-code-square"></i>
+              <span data-purecounter-start="0" data-purecounter-end="4" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Programming Languages</strong> <span>Python, SQL, R, Arcade</span></p>
+            </div>
+          </div>
+
         </div>
+
       </div>
-      <div class="hero-photo">
-        <img class="profile-img" src="assets/profile.jpg" alt="Carlos Pérez profile photo">
+
+    </section><!-- /Stats Section -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section light-background">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Key Skills</h2>
+        <p>Core technical competencies in GIS, remote sensing, programming, and environmental analysis</p>
       </div>
-      <div style="background: rgba(255,255,255,0.1); border-radius: 60px; padding: 0.8rem 1.2rem; backdrop-filter: blur(4px);">
-        <i class="fas fa-globe-americas" style="font-size: 2.2rem;"></i>
-        <div style="font-weight: 600; font-size: 0.8rem;">ArcGIS | Python | FME | SQL</div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row skills-content skills-animation">
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill"><span>ArcGIS Pro / ArcMap / AGOL</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>Python (GIS Automation)</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>FME / Data Manipulation</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>Remote Sensing</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>SQL (PostgreSQL, SQL Server)</span> <i class="val">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill"><span>Open-source software</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>3D Visualization (Blender, Unreal,LiDAR, cloudcompare)</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>Cartography & Reporting</span> <i class="val">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>Data Integrity & QA/QC</span> <i class="val">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="progress">
+              <span class="skill"><span>Office and Other Tools (Microsoft Project, Excel, Word)</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Skills Section -->
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Resume</h2>
+        <p>Professional experience and academic background in Environmental Engineering and Geographic Information Systems</p>
+      </div>
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div>
+            </div>
+
+            <h3 class="resume-title">Education</h3>
+            <div class="resume-item">
+              <h4>Bachelor of Applied Geographic Information Systems (BGIS)</h4>
+              <h5>2025 – Present</h5>
+              <p><em>Southern Alberta Institute of Technology (SAIT), Calgary, AB</em></p>
+              <p>Expanding expertise in spatial analysis, remote sensing, and data automation.</p>
+            </div>
+
+            <div class="resume-item">
+              <h4>Bachelor's degree in Environmental Engineering</h4>
+              <h5>2015 – 2021</h5>
+              <p><em>Universidad Pontificia Bolivariana, Colombia</em></p>
+              <p>Comprehensive training in environmental science, project management, and engineering principles.</p>
+            </div>
+
+            <h3 class="resume-title">Languages</h3>
+            <div class="resume-item">
+              <h4>English</h4>
+              <p>Full professional proficiency</p>
+              <h4>Spanish</h4>
+              <p>Native</p>
+            </div>
+
+            <h3 class="resume-title">Soft Skills</h3>
+            <div class="resume-item">
+              <ul>
+                <li><strong>Results-oriented:</strong> Ability to prioritize objectives, optimizing available resources efficiently and in a timely manner, without compromising the quality of work.</li>
+                <li><strong>Adaptability:</strong> High ability to adapt to new environments, with ease in learning and implementing new methodologies, procedures, and requirements.</li>
+                <li><strong>Communication and teamwork:</strong> Clear and assertive verbal and written communication that promotes collaboration, teamwork, and positive learning environments.</li>
+                <li><strong>Self-learning:</strong> Ability to acquire knowledge constantly and quickly, applying it to the work environment to optimize processes and tasks.</li>
+                <li><strong>Problem solving:</strong> Effective performance in high-pressure environments, ensuring speed of execution and high-quality standards.</li>
+                <li><strong>Openness to feedback:</strong> Receptive attitude to constructive criticism, using it as an opportunity to continuously improve the quality of work.</li>
+                <li><strong>Motivation and curiosity:</strong> Passionate about learning, researching, and exploring new topics that add value to the projects I participate in.</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Professional Experience</h3>
+
+            <div class="resume-item">
+              <h4>Environmental and Project Engineer</h4>
+              <h5>May 2022 – Jun 2025</h5>
+              <p><em>PSL Proanálisis – Floridablanca, Colombia</em></p>
+              <ul>
+                <li><strong>Data Management:</strong> Standardization, organization, and implementation of QA/QC procedures throughout the collection, processing, and management of field data to ensure data quality and traceability.</li>
+                <li><strong>Automation:</strong> Automation of processes using Python and Excel macros to ensure data repeatability and quality.</li>
+                <li><strong>Uncertainty Analysis:</strong> Development of spreadsheets for uncertainty estimation using the Monte Carlo method during data collection, organization, and processing.</li>
+                <li><strong>Statistical Analysis:</strong> Execution of multiple statistical analyses on field-collected data to estimate variability, uncertainty, standard deviation, among other metrics.</li>
+                <li><strong>GIS Support & Spatial Analysis:</strong> Provided support in the migration of geospatial data from ArcMap to ArcGIS Pro and delineated protected areas for oil and gas-related projects to support environmental decision-making.</li>
+                <li><strong>Reporting:</strong> Preparation of technical and environmental reports based on current legal and regulatory frameworks, ensuring compliance with relevant authorities.</li>
+                <li><strong>Research:</strong> Lead researcher in studies focused on the removal of dyes used in the textile industry through the application of various fungal strains.</li>
+              </ul>
+            </div>
+
+            <div class="resume-item">
+              <h4>Geospatial Data Analyst | Capstone Project</h4>
+              <h5>Jan 2026 – Apr 2026</h5>
+              <p><em>SAIT / Saskatchewan Polytechnic</em></p>
+              <p><strong>Assessment of the Impact of Oil on the Frog Lake First Nation</strong></p>
+              <ul>
+                <li>Developed automated geospatial workflows for data collection, validation, processing, and reporting using Python, cloud-based GIS technologies, and multi-source datasets.</li>
+                <li>Developed a standalone Python application using Google Earth Engine with a user-friendly interface, automating multi-source satellite imagery download and processing workflows to generate NDVI indices and support vegetation change analysis using Landsat and Sentinel-2 datasets.</li>
+                <li>Developed a standalone Python application integrating multiple Google Earth Engine datasets to analyze vegetation change and generate interactive maps exported as local HTML files. The workflow incorporates AI components, using S2Cloudless for cloud detection and masking in Sentinel-2 imagery and Gemini (AI) to interpret results and automatically generate clear, non-technical insights for non-GIS audiences, including First Nations communities.</li>
+                <li>Complete packaging of the script was implemented along with a user-friendly graphical interface, allowing end users to operate the tool without manually installing the required libraries.</li>
+                <li>Conducted an environmental study and developed an interactive dashboard to communicate results, supporting community collaboration and multi-source data integration workflows.</li>
+              </ul>
+            </div>
+
+            <div class="resume-item">
+              <h4>Environmental Data Analyst | Academic Project</h4>
+              <h5>Sep 2025 – Dec 2025</h5>
+              <p><em>Southern Alberta Institute of Technology (SAIT)</em></p>
+              <p><strong>Groundwater Vulnerability Assessment</strong></p>
+              <ul>
+                <li>Development of a groundwater vulnerability index in the Province of Alberta, using public and open-source data through the mapping of water wells and the analysis of key variables such as permeability, water level, sediment thickness, and distance to agricultural areas.</li>
+                <li>Using open data from Sentinel Land Use/Land Cover (LULC), agricultural zones were identified to subsequently perform buffer analyses and calculate distances between water wells and agricultural areas.</li>
+                <li>Statistical analyses (Hot Spot and Cold Spot Analysis) were conducted to identify regions of Alberta exhibiting higher vulnerability in relation to agricultural land use.</li>
+                <li>Delivery of thematic maps and a technical report to support initiatives aimed at groundwater protection and preservation.</li>
+              </ul>
+            </div>
+
+            <div class="resume-item">
+              <h4>Environmental Engineering Research</h4>
+              <h5>Jan 2021 – Dec 2021</h5>
+              <p><em>Universidad Pontificia Bolivariana, Bucaramanga, Colombia</em></p>
+              <p><strong>Vulnerability Index for Transboundary Aquifers (DRASTIC Method)</strong></p>
+              <ul>
+                <li>An index was developed to quantify the vulnerability of transboundary aquifers, considering both the natural characteristics of the aquifers and the anthropogenic activities occurring around these water bodies.</li>
+                <li>GIS analysis was used to create an elevation model in QGIS, which allowed the determination of key variables such as elevation, net recharge, and aquifer layer thickness.</li>
+                <li>A geospatial analysis was then conducted to identify the regions experiencing higher levels of vulnerability based on the variables obtained.</li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Resume Section -->
+
+    <!-- ============================================================ -->
+    <!-- PORTFOLIO SECTION - ACTUALIZADA CON IMÁGENES CORRECTAS      -->
+    <!-- ============================================================ -->
+    <section id="portfolio" class="portfolio section light-background">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <p>Featured projects in GIS, remote sensing, 3D modeling, and environmental analysis</p>
+      </div>
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <!-- 1. LiDAR 3D Interactive Model - River Park -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-gis filter-3d">
+              <div class="portfolio-content h-100">
+                <img src="assets/CLAS.png" class="img-fluid" alt="LiDAR 3D Model - River Park">
+                <div class="portfolio-info">
+                  <h4>LiDAR 3D Interactive Model</h4>
+                  <p>River Park, Calgary - Experience Builder</p>
+                  <a href="portfolio-details.html#lidar" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. 3D Banff Model - GAEA + Blender -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-3d">
+              <div class="portfolio-content h-100">
+                <img src="assets/banff-terrain.png" class="img-fluid" alt="3D Banff Model">
+                <div class="portfolio-info">
+                  <h4>3D Banff Model</h4>
+                  <p>GAEA + Blender Terrain Simulation</p>
+                  <a href="portfolio-details.html#banff" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Calgary Tree Canopy Height -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-gis filter-3d">
+              <div class="portfolio-content h-100">
+                <img src="assets/CalCanopy.png" class="img-fluid" alt="Calgary Tree Canopy">
+                <div class="portfolio-info">
+                  <h4>Calgary Tree Canopy Height</h4>
+                  <p>Urban Forest 3D Visualization with R</p>
+                  <a href="portfolio-details.html#canopy" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Unreal Engine 5 + Cesium -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-3d filter-gis">
+              <div class="portfolio-content h-100">
+                <img src="assets/U5_VAT.png" class="img-fluid" alt="Unreal Engine 5 + Cesium">
+                <div class="portfolio-info">
+                  <h4>Unreal Engine 5 + Cesium</h4>
+                  <p>Interactive 3D GIS Models</p>
+                  <a href="portfolio-details.html#unreal" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. GIS Standalone Tools - Downloader -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-tools">
+              <div class="portfolio-content h-100">
+                <img src="assets/Satdown.png" class="img-fluid" alt="Sentinel & Landsat Downloader">
+                <div class="portfolio-info">
+                  <h4>Sentinel & Landsat Downloader</h4>
+                  <p>Standalone Tool with Earth Engine</p>
+                  <a href="portfolio-details.html#tools" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Groundwater Vulnerability Assessment -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-environmental">
+              <div class="portfolio-content h-100">
+                <img src="assets/AB.jpg" class="img-fluid" alt="Groundwater Vulnerability">
+                <div class="portfolio-info">
+                  <h4>Groundwater Vulnerability</h4>
+                  <p>Alberta, Canada - Hydrogeological Analysis</p>
+                  <a href="portfolio-details.html#groundwater" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Aviation Accidents California -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-gis">
+              <div class="portfolio-content h-100">
+                <img src="assets/Accidents.png" class="img-fluid" alt="Aviation Accidents California">
+                <div class="portfolio-info">
+                  <h4>Aviation Accidents Distribution</h4>
+                  <p>California - Experience Builder</p>
+                  <a href="portfolio-details.html#aviation" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Spatial Distribution - California -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-gis">
+              <div class="portfolio-content h-100">
+                <img src="assets/California.jpg" class="img-fluid" alt="Spatial Distribution California">
+                <div class="portfolio-info">
+                  <h4>Spatial Distribution - California</h4>
+                  <p>Demographic Patterns & Cartography</p>
+                  <a href="portfolio-details.html#demographic" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. Vegetation Change Detection -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-tools">
+              <div class="portfolio-content h-100">
+                <img src="assets/Veg.png" class="img-fluid" alt="Vegetation Change Detection">
+                <div class="portfolio-info">
+                  <h4>Vegetation Change Detection</h4>
+                  <p>AI-Assisted Remote Sensing Tool</p>
+                  <a href="portfolio-details.html#tools" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+              
+            <!-- 10. 3D Terrain Visualization with LiDAR and OpenStreetMap -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-gis filter-3d">
+              <div class="portfolio-content h-100">
+                <img src="assets/Finaltopo.png" class="img-fluid" alt="3D Terrain Visualization with LiDAR and OpenStreetMap">
+                <div class="portfolio-info">
+                  <h4>3D Terrain Visualization</h4>
+                  <p>LiDAR + OpenStreetMap with R</p>
+                  <a href="portfolio-details.html#terrain" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+     <!-- Contact Section -->
+    <section id="contact" class="contact section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Get in touch for collaborations, project inquiries, or professional opportunities</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+
+            <div class="info-wrap">
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h3>Location</h3>
+                  <p>Calgary, Alberta, Canada</p>
+                </div>
+              </div>
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-telephone flex-shrink-0"></i>
+                <div>
+                  <h3>Call</h3>
+                  <p>587-438-7249</p>
+                </div>
+              </div>
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h3>Email</h3>
+                  <p>carlosdanielperez8@gmail.com</p>
+                </div>
+              </div>
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
+                <i class="bi bi-linkedin flex-shrink-0"></i>
+                <div>
+                  <h3>LinkedIn</h3>
+                  <p><a href="https://www.linkedin.com/in/carlos-daniel-perez-garcia-34ba1b2b5/" target="_blank">Carlos Pérez</a></p>
+                </div>
+              </div>
+
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d321201.3150667517!2d-114.32973036965429!3d51.02748659546467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x537170039f8437d5%3A0x266d3c41eefb12b9!2sCalgary%2C%20AB!5e0!3m2!1sen!2sca!4v1743428000000!5m2!1sen!2sca" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <label for="name-field" class="pb-2">Your Name</label>
+                  <input type="text" name="name" id="name-field" class="form-control" required="">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email-field" class="pb-2">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="subject-field" class="pb-2">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="message-field" class="pb-2">Message</label>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Carlos Pérez</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="credits">
+        GIS & Environmental Engineering Portfolio
       </div>
     </div>
-  </div>
 
-  <div class="card" style="margin-bottom: 1.5rem;">
-    <div class="card-icon"><i class="fas fa-user-check"></i></div>
-    <h3>About Me</h3>
-    <p>I am an Environmental Engineer from Colombia with over three years of professional experience in environmental projects and engineering. My background combines environmental science, project management, and technical problem-solving using Geographic Information Systems (GIS) and programming tools such as Python, ArcGIS, SQL, and FME. I have experience in automating geospatial workflows, verifying spatial data quality, and producing cartographic outputs to support efficient and reliable decision-making. Currently, I am pursuing the BGIS program, where I am expanding my expertise in spatial analysis, remote sensing, and data automation. I am passionate about applying geospatial technologies to solve real-world problems, optimize workflows, and support sustainable environmental management, while continuously developing my technical and analytical skills.</p>
-  </div>
+  </footer>
 
-  <div class="card map-card">
-    <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
-    <h3>My Roots: Colombia</h3>
-    <p>I was born and raised in Colombia, a country of incredible biodiversity, rich ecosystems, and diverse landscapes that inspired my passion for environmental engineering and geospatial sciences.</p>
-    <div id="colombiaMap" class="origin-map"></div>
-    <div class="map-caption"><i class="fas fa-location-dot"></i> Bucaramanga, my hometown</div>
-  </div>
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <div id="skills-section" class="grid-2col">
-    <div class="card">
-      <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-      <h3>Core Technical Skills</h3>
-      <div style="margin-bottom: 0.8rem;"><strong>GIS Software</strong><br><span class="skill-badge">ArcGIS Pro</span> <span class="skill-badge">ArcMap</span> <span class="skill-badge">AGOL</span> <span class="skill-badge">QGIS</span> <span class="skill-badge">ArcGIS Enterprise</span> <span class="skill-badge">ArcGIS Field Maps</span> <span class="skill-badge">Blender GIS</span> <span class="skill-badge">GAEA</span> <span class="skill-badge">Google Earth Pro</span> <span class="skill-badge">Google Earth Engine</span> <span class="skill-badge">Unreal Engine 5</span></div>
-      <div style="margin-bottom: 0.8rem;"><strong>Remote Sensing & Raster</strong><br><span class="skill-badge">Landsat/Sentinel-2</span> <span class="skill-badge">NDVI</span> <span class="skill-badge">DEMs</span> <span class="skill-badge">Land cover classification</span> <span class="skill-badge">Vegetation loss analysis</span></div>
-      <div style="margin-bottom: 0.8rem;"><strong>Programming & Automation</strong><br><span class="skill-badge">Python</span> <span class="skill-badge">FME</span> <span class="skill-badge">Model Builder</span> <span class="skill-badge">Arcade</span> <span class="skill-badge">PostgreSQL</span> <span class="skill-badge">SQL Server</span> <span class="skill-badge">VS Code</span> <span class="skill-badge">PyScripter</span> <span class="skill-badge">Microsoft Access</span></div>
-      <div><strong>Data Integrity & Optimization</strong><br>Quality control, traceability, Monte Carlo uncertainty analysis, spreadsheet automation, geospatial and environmental dataset management (soil, water, air, wastewater), GIS data creation and conversion, cartographic visualization, and workflow optimization for multi-disciplinary project support.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon"><i class="fas fa-drafting-compass"></i></div>
-      <h3>Cartography & Reporting</h3>
-      <p>Technical reports, statistical analysis, thematic/web maps, Adobe Illustrator, Inkscape, Microsoft Project, Excel advanced, PowerPoint, Word.</p>
-      <hr>
-      <div class="lang-soft">
-        <div><i class="fas fa-language"></i> <strong>Languages</strong><br>English (Full professional)<br>Spanish (Native)</div>
-        <div><i class="fas fa-users"></i> <strong>Soft Skills</strong><br>Results-oriented • Adaptability • Communication<br>Self-learning • Problem solving • Openness to feedback<br>Motivation & curiosity</div>
-      </div>
-    </div>
-  </div>
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-  <div id="education-section" class="card" style="margin-bottom: 1.5rem;">
-    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
-    <h3>Education</h3>
-    <div class="university-logos" style="padding: 1.5rem 2rem;">
-      <div class="uni-logo-item" style="padding: 0.8rem 1.5rem 0.8rem 1rem; gap: 1.2rem;">
-        <img class="uni-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/SAIT_curly_logo.png" alt="SAIT logo" style="width: 68px; height: 68px;">
-        <div class="uni-logo-text" style="font-size: 1.1rem;">Southern Alberta Institute of Technology (SAIT)<small style="font-size: 0.85rem; font-weight: 500;">2025 – Present | Bachelor of Applied Geographic Information Systems (BGIS)</small></div>
-      </div>
-      <div class="uni-logo-item" style="padding: 0.8rem 1.5rem 0.8rem 1rem; gap: 1.2rem;">
-        <img class="uni-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Logos%C3%ADmbolo_UPB.svg/960px-Logos%C3%ADmbolo_UPB.svg.png" alt="Universidad Pontificia Bolivariana logo" style="width: 68px; height: 68px;">
-        <div class="uni-logo-text" style="font-size: 1.1rem;">Universidad Pontificia Bolivariana, Colombia<small style="font-size: 0.85rem; font-weight: 500;">2015 – 2021 | Bachelor's degree in Environmental Engineering</small></div>
-      </div>
-    </div>
-  </div>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <div id="experience-section">
-    <div class="section-title"><i class="fas fa-briefcase"></i> Work Experience</div>
-    <div class="card">
-      <div class="exp-item">
-        <div class="exp-title">Environmental and Project Engineer</div>
-        <div class="exp-meta">PSL Proanálisis – Floridablanca, Colombia | May 2022 – Jun 2025</div>
-        <ul class="exp-desc"><li><strong>Data Management:</strong> Standardization and organization of field-collected data using spreadsheets to prevent duplicate records and measurement errors.</li><li><strong>Automation:</strong> Python scripts & Excel macros to ensure data repeatability and quality.</li><li><strong>Uncertainty Analysis:</strong> Spreadsheets for Monte Carlo method during data collection/processing.</li><li><strong>Statistical Analysis:</strong> Estimation of variability, uncertainty, standard deviation on environmental datasets.</li><li><strong>Protected Areas Delimitation:</strong> GIS mapping for mining, energy, urban development decision-making.</li><li><strong>Reporting:</strong> Technical and environmental reports under legal frameworks.</li><li><strong>Research:</strong> Lead researcher in dye removal using fungal strains (textile industry).</li></ul>
-      </div>
-    </div>
-  </div>
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
 
-  <div class="section-title"><i class="fas fa-project-diagram"></i> Capstone & Academic Projects</div>
-  <div class="grid-2col">
-    <div class="card"><div class="card-icon"><i class="fas fa-tint"></i></div><h3>Assessment of the Impact of Oil on the Frog Lake First Nation</h3><p><strong>SAIT - Saskatchewan Polytechnic| Jan 2026 – April 2026</strong></p><ul class="exp-desc"><li>Standalone Python app using Google Earth Engine to auto-download & process satellite imagery (Landsat/Sentinel-2) for NDVI & vegetation change analysis.</li><li>Integrates multiple GEE datasets, generates interactive maps (HTML), and uses AI models: S2Cloudless for cloud removal + Gemini as interpreter for automated insights.</li><li>Complete packaging with user-friendly GUI – no manual library installation required.</li><li>Interactive map using Python & LandTrendr tool to dynamically visualize vegetation changes.</li></ul></div>
-    <div class="card"><div class="card-icon"><i class="fas fa-water"></i></div><h3>Groundwater Vulnerability Assessment</h3><p><strong>SAIT Environmental Data Analyst | Sep 2025 – Dec 2025</strong></p><ul class="exp-desc"><li>Developed groundwater vulnerability index in Alberta using public data: water wells, permeability, water level, sediment thickness, distance to agriculture.</li><li>Used Sentinel LULC data to identify agricultural zones + buffer & distance analysis.</li><li>Hot Spot & Cold Spot statistical analysis to detect high vulnerability regions.</li><li>Delivered thematic maps + technical report for groundwater protection initiatives.</li></ul></div>
-  </div>
-
-  <div class="card"><div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div><h3>Environmental Engineering Research Experience</h3><div class="exp-item"><div class="exp-title">Vulnerability Index for Transboundary Aquifers (DRASTIC Method)</div><div class="exp-meta">Universidad Pontificia Bolivariana, Colombia | Jan 2021 – Dec 2021</div><ul class="exp-desc"><li>Developed an index to quantify aquifer vulnerability considering natural characteristics and anthropogenic activities.</li><li>GIS analysis with QGIS: elevation model, net recharge, aquifer thickness mapping.</li><li>Geospatial analysis identified regions with higher vulnerability based on DRASTIC variables.</li></ul></div></div>
-
-  <div class="grid-2col" style="margin-top: 1rem;">
-    <div class="card"><div class="card-icon"><i class="fas fa-code"></i></div><h3>Programming & Automation Showcase</h3><ul class="exp-desc"><li><strong>Python & GEE:</strong> Scripted NDVI time-series, raster batch processing, standalone apps.</li><li><strong>FME Workbenches:</strong> Automated data transformation for environmental impact reports.</li><li><strong>SQL Server & PostgreSQL:</strong> Spatial queries, data integrity enforcement.</li><li><strong>ArcGIS Model Builder:</strong> Streamlined suitability analysis workflows.</li><li><strong>Excel Macros & Monte Carlo:</strong> Uncertainty estimation, data quality automation.</li></ul></div>
-    <div class="card"><div class="card-icon"><i class="fas fa-chart-pie"></i></div><h3>Key Achievements</h3><ul class="exp-desc"><li>Reduced data processing time by 35% using Python automation in environmental reports.</li><li>Led geospatial support for 3+ environmental licensing projects in Colombia.</li><li>Development of two standalone tools using Python for satellite image processing via Google Earth Engine.</li><li>Monte Carlo uncertainty models increased reliability of field sampling campaigns.</li><li>Lead researcher in fungal dye removal study for textile industry wastewater.</li></ul></div>
-  </div>
-
-  <div id="contact-section" class="footer">
-    <p><i class="fas fa-map-marked-alt"></i> Carlos Pérez — GIS & Environmental Engineering Portfolio - <strong>carlosdanielperez8@gmail.com</strong></p>
-  </div>
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  // Hybrid map with satellite imagery + labels (ESRI World Imagery with Labels overlay)
-  const map = L.map('colombiaMap').setView([7.1192, -73.1229], 12);
-  
-  // Base hybrid layer: ESRI World Imagery (satellite)
-  const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-    maxZoom: 5
-  });
-  
-  // Labels overlay for places, streets, and geographic names
-  const esriLabels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Places &copy; Esri',
-    maxZoom: 5,
-    opacity: 0.9
-  });
-  
-  esriSatellite.addTo(map);
-  esriLabels.addTo(map);
-  
-  // Custom marker for Bucaramanga
-  const customIcon = L.divIcon({
-    html: '<div style="background: #ffb347; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 2px solid white;"><i class="fas fa-map-marker-alt" style="font-size: 18px; color: #1a2c3e;"></i></div>',
-    iconSize: [36, 36],
-    popupAnchor: [0, -18],
-    className: 'custom-marker'
-  });
-  
-  L.marker([7.1192, -73.1229], { icon: customIcon }).addTo(map)
-    .bindPopup(`
-      <b>🏙️ Bucaramanga</b><br>
-      <i>My hometown</i><br>
-      Known as "La Ciudad Bonita" (The Beautiful City)
-    `)
-    .openPopup();
-  
-  // Add a subtle scale bar for cartographic reference
-  L.control.scale({ metric: true, imperial: false, position: 'bottomleft' }).addTo(map);
-  
-  // NUEVA FUNCIONALIDAD: Descargar CV (archivo "Carlos Perez CV.docx" desde la carpeta assets/ o raíz)
-  // Se asume que el archivo está disponible en la ruta especificada.
-  // Para que funcione correctamente, el archivo "Carlos Perez CV.docx" debe estar en la carpeta 'assets'  
-  // o se puede ajustar la ruta. Se usará "./Carlos Perez CV.docx" por defecto.
-  const downloadBtn = document.getElementById('downloadCvBtn');
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      // Nombre del archivo según requerimiento: 'Carlos Perez CV.docx'
-      // Ruta: se puede cambiar si se necesita. Se coloca en el mismo directorio raíz del portfolio,
-      // pero también se intenta con 'assets/Carlos Perez CV.docx' como respaldo.
-      const fileName = 'Carlos Perez-CV.docx';
-      // Intento de rutas: primero en el directorio actual, luego en assets.
-      // Se genera un enlace de descarga directa con fetch para mejor compatibilidad 
-      // y se fuerza la descarga con el nombre deseado.
-      fetch(fileName)
-        .then(response => {
-          if (!response.ok) {
-            // Si no se encuentra en raíz, probar en carpeta assets
-            return fetch(`assets/${fileName}`);
-          }
-          return response;
-        })
-        .then(res => {
-          if (!res.ok) {
-            throw new Error(`No se pudo encontrar el archivo: "${fileName}" o "assets/${fileName}". Asegúrate de que el archivo esté disponible.`);
-          }
-          return res.blob();
-        })
-        .then(blob => {
-          // Crear URL temporal y simular clic de descarga
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = fileName;   // Forzar nombre "Carlos Perez CV.docx"
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-        })
-        .catch(error => {
-          console.error('Error al descargar CV:', error);
-          alert(`No se pudo descargar el CV. Por favor asegúrate de que el archivo "${fileName}" esté ubicado en la carpeta raíz del portfolio o dentro de 'assets/'. Error: ${error.message}`);
-        });
-    });
-  }
-
-  // Navigation buttons event listeners
-  document.getElementById('contactBtn')?.addEventListener('click', () => { 
-    const email = 'carlosdanielperez8@gmail.com'; 
-    navigator.clipboard.writeText(email).then(() => alert(`📋 Email copied: ${email}\nYou can now send your message.`)).catch(() => window.location.href = `mailto:${email}?subject=GIS Intern Opportunity&body=Hello Carlos,%0D%0A%0D%0AI came across your portfolio and would like to connect regarding GIS opportunities.`); 
-  });
-  document.getElementById('navSkillsBtn')?.addEventListener('click', () => document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  document.getElementById('navExperienceBtn')?.addEventListener('click', () => document.getElementById('experience-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  document.getElementById('navEducationBtn')?.addEventListener('click', () => document.getElementById('education-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  document.getElementById('navContactBtn')?.addEventListener('click', () => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  document.getElementById('navProjectsBtn')?.addEventListener('click', () => window.location.href = 'projects.html');
-</script>
 </body>
+
 </html>
